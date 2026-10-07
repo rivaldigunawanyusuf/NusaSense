@@ -5,9 +5,10 @@ export const APP_TAGLINE = "Proactive fundamental intelligence for IDX retail in
 export const SCAN_SCHEDULE_LABEL = "Daily scan · 06:00 WIB";
 
 export const ROUTES = {
-  home: "/",
-  watchlist: "/watchlist",
-  settings: "/settings",
+  landing: "/",
+  home: "/app",
+  watchlist: "/app/watchlist",
+  settings: "/app/settings",
 } as const;
 
 /** Maximum number of priority tickers a user may track (per PRD). */

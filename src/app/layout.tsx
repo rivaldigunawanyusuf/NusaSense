@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 
-import { AppHeader } from "@/components/layout/AppHeader";
-import { BottomNav } from "@/components/layout/BottomNav";
 import { APP_NAME } from "@/lib/constants";
 import "./globals.css";
 
@@ -45,25 +43,15 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body>
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-canvas"
-        >
-          Skip to content
-        </a>
-
-        <div className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col sm:border-x sm:border-line">
-          <AppHeader />
-          <main id="main" className="pb-safe-nav flex-1 px-4 pt-5">
-            {children}
-          </main>
-        </div>
-
-        <BottomNav />
+      <body className="bg-canvas text-ink antialiased selection:bg-brand selection:text-canvas">
+        {children}
       </body>
     </html>
   );
