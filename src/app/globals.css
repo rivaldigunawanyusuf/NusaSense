@@ -11,47 +11,47 @@
     
     /* Surfaces */
     --canvas: #ffffff;
-    --surface: #f4f4f5;
-    --surface-hover: #e4e4e7;
+    --surface: #ffffff;
+    --surface-hover: #f8fafc;
     --elevated: #ffffff;
-    --field: #e4e4e7;
+    --field: #f1f5f9;
 
     /* Lines */
-    --line: #e4e4e7;
-    --line-strong: #d4d4d8;
+    --line: #e2e8f0;
+    --line-strong: #cbd5e1;
 
     /* Text */
-    --ink: #09090b;
-    --ink-muted: #71717a;
-    --ink-faint: #a1a1aa;
+    --ink: #0f172a;
+    --ink-muted: #64748b;
+    --ink-faint: #94a3b8;
 
     /* Skeleton colors */
-    --skeleton-field: #f4f4f5;
-    --skeleton-highlight: #e4e4e7;
+    --skeleton-field: #f1f5f9;
+    --skeleton-highlight: #e2e8f0;
   }
 
   .dark {
     color-scheme: dark;
     
-    /* Surfaces */
-    --canvas: #0a0a0a;
-    --surface: #141414;
-    --surface-hover: #1c1c1c;
-    --elevated: #1a1a1a;
-    --field: #262626;
+    /* Surfaces (CoinGecko dark mode is a deep slate/blue-gray) */
+    --canvas: #0f141e;
+    --surface: #181f2d;
+    --surface-hover: #1e293b;
+    --elevated: #1e293b;
+    --field: #1e293b;
 
     /* Lines */
-    --line: #262626;
-    --line-strong: #333333;
+    --line: #334155;
+    --line-strong: #475569;
 
     /* Text */
-    --ink: #fafafa;
-    --ink-muted: #a3a3a3;
-    --ink-faint: #8a8a8a;
+    --ink: #f8fafc;
+    --ink-muted: #94a3b8;
+    --ink-faint: #64748b;
 
     /* Skeleton colors */
-    --skeleton-field: #262626;
-    --skeleton-highlight: #313131;
+    --skeleton-field: #1e293b;
+    --skeleton-highlight: #334155;
   }
 }
 
