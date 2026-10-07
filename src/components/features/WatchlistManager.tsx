@@ -9,26 +9,36 @@ import { EmptyState } from '../ui/EmptyState';
 
 export function WatchlistManager() {
   const { watchlist, toggleWatchlist, _hasHydrated } = useAppStore();
+  const [mounted, setMounted] = useState(false);
+  const [displayValue, setDisplayValue] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [mounted, setMounted] = useState(false);
 
   // Prevent hydration mismatch
   useEffect(() => setMounted(true), []);
   
+  // Debounce input value to prevent excessive re-renders
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setInputValue(displayValue);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [displayValue]);
+
   if (!mounted || !_hasHydrated) return null;
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
 
-    const clean = sanitizeTicker(inputValue);
+    const clean = sanitizeTicker(inputValue); // Uses the debounced value
     if (!clean) {
       setErrorMsg('Invalid ticker format. Use 1-5 letters (e.g. BBCA).');
       return;
     }
 
     if (watchlist.includes(clean)) {
+      setDisplayValue('');
       setInputValue('');
       return;
     }
@@ -39,6 +49,7 @@ export function WatchlistManager() {
     }
 
     toggleWatchlist(clean);
+    setDisplayValue('');
     setInputValue('');
   };
 
@@ -48,8 +59,8 @@ export function WatchlistManager() {
         <div className="relative flex-1">
           <input
             type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            value={displayValue}
+            onChange={(e) => setDisplayValue(e.target.value)}
             placeholder="Add ticker (e.g. BBCA)"
             className="w-full rounded-full border border-line bg-surface px-4 py-2.5 text-sm text-ink placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand uppercase"
             maxLength={5}

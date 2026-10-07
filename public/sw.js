@@ -143,14 +143,23 @@ async function evaluateRulesAndNotify() {
     const data = await response.json();
 
     const matches = [];
+    const CHUNK_SIZE = 100;
+    const alerts = data.alerts || [];
 
-    data.alerts.forEach(alert => {
-      // Check if alert matches any active user rule
-      const isMatch = activeRules.some(rule => evaluateRule(rule, alert.metrics));
-      if (isMatch) {
-        matches.push(alert);
-      }
-    });
+    // Process in chunks to avoid blocking the SW thread
+    for (let i = 0; i < alerts.length; i += CHUNK_SIZE) {
+      const chunk = alerts.slice(i, i + CHUNK_SIZE);
+      
+      await new Promise(resolve => setTimeout(() => {
+        chunk.forEach(alert => {
+          const isMatch = activeRules.some(rule => evaluateRule(rule, alert.metrics));
+          if (isMatch) {
+            matches.push(alert);
+          }
+        });
+        resolve();
+      }, 0));
+    }
 
     // For demonstration, just notify about the first match to avoid spam
     if (matches.length > 0) {
