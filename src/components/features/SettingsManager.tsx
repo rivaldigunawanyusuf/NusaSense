@@ -1,11 +1,16 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Send, Bell } from 'lucide-react';
 import { useAppStore } from '@/lib/store/useAppStore';
 import { ListGroup, ListRow } from '../ui/ListGroup';
 
 export function SettingsManager() {
-  const { alertPrefs, setAlertsEnabled } = useAppStore();
+  const { alertPrefs, setAlertsEnabled, _hasHydrated } = useAppStore();
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => setMounted(true), []);
+  if (!mounted || !_hasHydrated) return null;
 
   return (
     <ListGroup title="Alert delivery">

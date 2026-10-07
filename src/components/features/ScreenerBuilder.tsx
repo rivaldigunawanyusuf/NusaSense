@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { Plus, Trash2, CheckCircle2, Circle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Plus, Trash2, CheckCircle2, Circle, ListFilter } from "lucide-react";
 import { useAppStore } from "@/lib/store/useAppStore";
-import { SignalMetrics } from "@/types/signal";
+import { EmptyState } from "@/components/ui/EmptyState";
 
 const AVAILABLE_METRICS = [
   { id: "currentPE", label: "P/E Ratio" },
@@ -22,29 +22,49 @@ const OPERATORS = [
 ];
 
 export function ScreenerBuilder() {
-  const { userRules, addUserRule, removeUserRule, toggleUserRule } = useAppStore();
+  const { userRules, addUserRule, removeUserRule, toggleUserRule, _hasHydrated } = useAppStore();
   
   const [metric, setMetric] = useState(AVAILABLE_METRICS[0].id);
   const [operator, setOperator] = useState(OPERATORS[0].id);
   const [value, setValue] = useState("15");
+  const [errorMsg, setErrorMsg] = useState("");
+  
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted || !_hasHydrated) return null;
 
   const handleAddRule = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!value || isNaN(Number(value))) return;
-    
-    const ruleString = `${metric} ${operator} ${value}`;
-    addUserRule({ ruleString, active: true });
-    
-    // Reset form value
-    setValue("");
+    try {
+      if (!value || value.trim() === "") {
+        throw new Error("Invalid formula syntax");
+      }
+      const parsedValue = Number(value);
+      if (isNaN(parsedValue)) {
+        throw new Error("Invalid formula syntax");
+      }
+      
+      const ruleString = `${metric} ${operator} ${parsedValue}`;
+      addUserRule({ ruleString, active: true });
+      
+      // Reset form value and error
+      setValue("");
+      setErrorMsg("");
+    } catch (err) {
+      if (err instanceof Error) {
+        setErrorMsg(err.message);
+      }
+    }
   };
+
+  const isInvalid = !value || value.trim() === "" || isNaN(Number(value));
 
   return (
     <div className="mt-6 flex flex-col gap-8">
       {/* Rule Builder Form */}
       <section className="rounded-2xl border border-line bg-surface p-5 shadow-sm">
         <h2 className="mb-4 text-base font-semibold text-ink">Add New Rule</h2>
-        <form onSubmit={handleAddRule} className="flex flex-col gap-4 sm:flex-row sm:items-end">
+        <form onSubmit={handleAddRule} className="flex flex-col gap-4 sm:flex-row sm:items-start">
           <div className="flex flex-col gap-1.5 flex-1">
             <label className="text-xs font-medium text-ink-faint">Metric</label>
             <select
@@ -81,16 +101,22 @@ export function ScreenerBuilder() {
               type="number"
               step="any"
               value={value}
-              onChange={(e) => setValue(e.target.value)}
+              onChange={(e) => {
+                setValue(e.target.value);
+                if (errorMsg) setErrorMsg("");
+              }}
               placeholder="e.g. 15"
-              className="h-10 rounded-lg border border-line bg-canvas px-3 text-sm text-ink outline-none focus:border-brand"
+              className={`h-10 rounded-lg border bg-canvas px-3 text-sm text-ink outline-none focus:border-brand ${
+                errorMsg ? "border-down focus:border-down" : "border-line"
+              }`}
             />
+            {errorMsg && <span className="text-xs text-down mt-1">{errorMsg}</span>}
           </div>
 
           <button
             type="submit"
-            disabled={!value}
-            className="flex h-10 items-center justify-center gap-2 rounded-lg bg-brand px-5 text-sm font-semibold text-canvas transition-colors hover:bg-brand-strong disabled:opacity-50 sm:w-auto w-full"
+            disabled={isInvalid}
+            className="flex h-10 mt-6 items-center justify-center gap-2 rounded-lg bg-brand px-5 text-sm font-semibold text-canvas transition-colors hover:bg-brand-strong disabled:opacity-50 sm:w-auto w-full"
           >
             <Plus className="size-4" />
             Add
@@ -103,10 +129,11 @@ export function ScreenerBuilder() {
         <h2 className="mb-4 text-base font-semibold text-ink">Your Strategies</h2>
         
         {userRules.length === 0 ? (
-          <div className="flex flex-col items-center justify-center p-8 text-ink-muted text-center rounded-2xl border border-dashed border-line bg-surface/50">
-            <p className="text-sm">No rules defined yet.</p>
-            <p className="text-xs text-ink-faint mt-1">Add a rule above to start screening.</p>
-          </div>
+          <EmptyState
+            icon={ListFilter}
+            title="No rules defined yet"
+            description="Add a rule above to start screening."
+          />
         ) : (
           <div className="flex flex-col gap-3">
             {userRules.map((rule) => {
@@ -143,7 +170,7 @@ export function ScreenerBuilder() {
                   </div>
                   <button
                     onClick={() => removeUserRule(rule.id)}
-                    className="rounded-lg p-2 text-ink-faint hover:bg-red-500/10 hover:text-red-500 transition-colors"
+                    className="rounded-lg p-2 text-ink-faint hover:bg-down/10 hover:text-down transition-colors"
                     aria-label="Delete rule"
                   >
                     <Trash2 className="size-4" />

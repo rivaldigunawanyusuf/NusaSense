@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus, X, Star } from 'lucide-react';
 import { useAppStore } from '@/lib/store/useAppStore';
 import { sanitizeTicker } from '@/lib/utils/security';
@@ -8,9 +8,15 @@ import { WATCHLIST_LIMIT } from '@/lib/constants';
 import { EmptyState } from '../ui/EmptyState';
 
 export function WatchlistManager() {
-  const { watchlist, toggleWatchlist } = useAppStore();
+  const { watchlist, toggleWatchlist, _hasHydrated } = useAppStore();
   const [inputValue, setInputValue] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [mounted, setMounted] = useState(false);
+
+  // Prevent hydration mismatch
+  useEffect(() => setMounted(true), []);
+  
+  if (!mounted || !_hasHydrated) return null;
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
