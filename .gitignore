@@ -45,3 +45,9 @@ _internal_vault/
 
 # environment secrets
 .env.local
+
+# e2e testing and CI logs
+/playwright-report
+/test-results
+/.lighthouseci
+/.lhcache
