@@ -47,7 +47,7 @@ export default function LandingPage() {
             className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
             aria-hidden="true"
           >
-            <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#a3e635] to-[#22c55e] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"></div>
+            <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#e11d48] to-[#f97316] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"></div>
           </div>
           
           <Hero3D />
@@ -58,7 +58,7 @@ export default function LandingPage() {
             
             <h1 className="mb-6 text-4xl font-bold tracking-tight text-ink dark:drop-shadow-[0_4px_12px_rgba(0,0,0,1)] sm:text-6xl">
               Proactive Fundamental <br className="hidden sm:block" />
-              <span className="bg-gradient-to-r from-brand to-up bg-clip-text text-transparent dark:drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
+              <span className="bg-gradient-to-r from-sectors-pink to-sectors-orange bg-clip-text text-transparent dark:drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
                 Market Intelligence
               </span>
             </h1>
@@ -72,7 +72,7 @@ export default function LandingPage() {
             <div className="flex justify-center gap-4">
               <Link
                 href={ROUTES.home}
-                className="group flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-base font-semibold text-canvas transition-all hover:bg-brand-strong shadow-[0_0_20px_rgba(163,230,53,0.3)] hover:shadow-[0_0_30px_rgba(163,230,53,0.5)]"
+                className="group flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-base font-semibold text-canvas transition-all hover:bg-brand-strong shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.5)]"
               >
                 Open Web App
                 <ChevronRight className="size-5 transition-transform group-hover:translate-x-1" />

@@ -12,16 +12,21 @@ export function BrandMark({ className }: BrandMarkProps) {
       aria-hidden="true"
       className={className}
     >
-      <rect width="32" height="32" rx="9" fill="#141414" />
-      <rect x="0.5" y="0.5" width="31" height="31" rx="8.5" stroke="#333333" />
+      <defs>
+        <linearGradient id="brand-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#e11d48" />
+          <stop offset="100%" stopColor="#f97316" />
+        </linearGradient>
+      </defs>
       <path
-        d="M6 17.5h5l2.5-6 4 11 3-8 1.5 3H26"
-        stroke="#a3e635"
-        strokeWidth="2.25"
+        d="M4 17.5h5l2.5-6 4 11 3-8 1.5 3H28"
+        stroke="url(#brand-gradient)"
+        strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        fill="none"
       />
-      <circle cx="26" cy="17.5" r="1.75" fill="#a3e635" />
+      <circle cx="28" cy="17.5" r="2" fill="url(#brand-gradient)" />
     </svg>
   );
 }

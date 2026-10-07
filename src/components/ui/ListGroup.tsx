@@ -5,7 +5,7 @@ interface ListGroupProps {
   children: ReactNode;
 }
 
-/** iOS/CoinGecko-style grouped list used on the Settings page. */
+/** iOS grouped list used on the Settings page. */
 export function ListGroup({ title, children }: ListGroupProps) {
   return (
     <section className="mt-6">

@@ -34,11 +34,11 @@ function DataLandscape() {
     <mesh ref={meshRef} rotation={[-Math.PI / 2.2, 0, 0]} position={[0, -2, 0]}>
       <planeGeometry ref={geomRef} args={[30, 30, 40, 40]} />
       <meshStandardMaterial 
-        color="#a3e635" 
+        color="#f97316" 
         wireframe={true} 
         transparent 
         opacity={0.8} 
-        emissive="#a3e635"
+        emissive="#f97316"
         emissiveIntensity={0.8}
       />
     </mesh>

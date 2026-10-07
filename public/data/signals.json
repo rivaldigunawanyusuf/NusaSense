@@ -1,0 +1,69 @@
+{
+  "alerts": [
+    {
+      "ticker": "BBCA",
+      "status": "anomaly",
+      "summary": "P/E ratio is currently 2.1 standard deviations above the 5-year historical average, indicating the market is pricing this stock significantly above its typical valuation range.",
+      "metrics": {
+        "currentPE": 28.5,
+        "historicalAvgPE": 18.2,
+        "currentPBV": 4.8,
+        "historicalAvgPBV": 3.9,
+        "dividendYield": 1.2,
+        "historicalAvgDividendYield": 1.8,
+        "revenueGrowthYoY": 12.3,
+        "netProfitGrowthYoY": 8.7
+      },
+      "deviation": {
+        "triggerMetric": "P/E Ratio",
+        "deviationFactor": 2.1,
+        "direction": "above"
+      },
+      "sparklineData": [
+        9850, 9900, 9875, 9925, 9950, 10000, 10050, 9975, 10100, 10150,
+        10200, 10175, 10250, 10300, 10275, 10350, 10400, 10375, 10450, 10500,
+        10475, 10550, 10600, 10575, 10650, 10700, 10725, 10750, 10800, 10850
+      ],
+      "detectedAt": "2024-01-15T06:00:00+07:00",
+      "disclaimer": "NusaSense provides data-driven anomaly detection for educational and informational purposes only. This is NOT financial advice."
+    },
+    {
+      "ticker": "TLKM",
+      "status": "anomaly",
+      "summary": "Dividend yield has spiked to 2.3 standard deviations above the 5-year mean, potentially signaling an undervalued state or a structural shift in dividend policy.",
+      "metrics": {
+        "currentPE": 11.2,
+        "historicalAvgPE": 15.4,
+        "currentPBV": 2.5,
+        "historicalAvgPBV": 3.2,
+        "dividendYield": 5.8,
+        "historicalAvgDividendYield": 3.2,
+        "revenueGrowthYoY": 4.1,
+        "netProfitGrowthYoY": 2.5
+      },
+      "deviation": {
+        "triggerMetric": "Dividend Yield",
+        "deviationFactor": 2.3,
+        "direction": "above"
+      },
+      "sparklineData": [
+        3400, 3380, 3350, 3320, 3300, 3280, 3260, 3250, 3230, 3200,
+        3220, 3240, 3210, 3180, 3150, 3170, 3190, 3200, 3220, 3210
+      ],
+      "detectedAt": "2024-01-15T06:00:00+07:00",
+      "disclaimer": "NusaSense provides data-driven anomaly detection for educational and informational purposes only. This is NOT financial advice."
+    }
+  ],
+  "marketSummary": {
+    "ihsgValue": 7234.56,
+    "ihsgChangePercent": -0.45,
+    "totalAnomalies": 2,
+    "totalAnalyzed": 45,
+    "lastUpdated": "2024-01-15T06:00:00+07:00"
+  },
+  "cache": {
+    "fromCache": true,
+    "cachedAt": "2024-01-15T06:00:00+07:00",
+    "expiresAt": "2024-01-16T06:00:00+07:00"
+  }
+}
