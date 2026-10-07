@@ -1,0 +1,22 @@
+{
+  "name": "NusaSense",
+  "short_name": "NusaSense",
+  "description": "Proactive IDX Market Intelligence",
+  "start_url": "/app",
+  "display": "standalone",
+  "background_color": "#0f141e",
+  "theme_color": "#0f141e",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icon.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
