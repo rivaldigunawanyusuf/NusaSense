@@ -1,5 +1,6 @@
 import { AppHeader } from "@/components/layout/AppHeader";
 import { BottomNav } from "@/components/layout/BottomNav";
+import { OnboardingModal } from "@/components/features/OnboardingModal";
 
 export default function AppLayout({
   children,
@@ -23,6 +24,7 @@ export default function AppLayout({
       </div>
 
       <BottomNav />
+      <OnboardingModal />
     </>
   );
 }

@@ -4,6 +4,7 @@ import { CalendarClock, Database, Info, Send } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Disclaimer } from "@/components/legal/Disclaimer";
 import { ListGroup, ListRow } from "@/components/ui/ListGroup";
+import { SettingsManager } from "@/components/features/SettingsManager";
 import { APP_VERSION } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -20,18 +21,7 @@ export default function SettingsPage() {
         description="Control how and where NusaSense delivers your signals."
       />
 
-      <ListGroup title="Alert delivery">
-        <ListRow
-          leading={<Send className="size-5" aria-hidden="true" />}
-          label="Telegram"
-          description="Receive anomaly alerts in your Telegram chat"
-          value={
-            <span className="rounded-full border border-line-strong px-2 py-0.5 text-xs text-ink-faint">
-              Not linked
-            </span>
-          }
-        />
-      </ListGroup>
+      <SettingsManager />
 
       <ListGroup title="About">
         <ListRow

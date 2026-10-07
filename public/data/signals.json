@@ -25,7 +25,17 @@
         10475, 10550, 10600, 10575, 10650, 10700, 10725, 10750, 10800, 10850
       ],
       "detectedAt": "2024-01-15T06:00:00+07:00",
-      "disclaimer": "NusaSense provides data-driven anomaly detection for educational and informational purposes only. This is NOT financial advice."
+      "disclaimer": "NusaSense provides data-driven anomaly detection for educational and informational purposes only. This is NOT financial advice.",
+      "healthScore": {
+        "totalScore": 75,
+        "axes": {
+          "valuation": 40,
+          "profitability": 95,
+          "growth": 65,
+          "liquidity": 80,
+          "solvency": 90
+        }
+      }
     },
     {
       "ticker": "TLKM",
@@ -51,7 +61,17 @@
         3220, 3240, 3210, 3180, 3150, 3170, 3190, 3200, 3220, 3210
       ],
       "detectedAt": "2024-01-15T06:00:00+07:00",
-      "disclaimer": "NusaSense provides data-driven anomaly detection for educational and informational purposes only. This is NOT financial advice."
+      "disclaimer": "NusaSense provides data-driven anomaly detection for educational and informational purposes only. This is NOT financial advice.",
+      "healthScore": {
+        "totalScore": 82,
+        "axes": {
+          "valuation": 85,
+          "profitability": 80,
+          "growth": 55,
+          "liquidity": 95,
+          "solvency": 95
+        }
+      }
     }
   ],
   "marketSummary": {
