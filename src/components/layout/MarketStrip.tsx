@@ -15,11 +15,11 @@ export function MarketStrip() {
       className="no-scrollbar flex items-center gap-5 overflow-x-auto border-t border-line/70 px-4 py-2 text-xs"
       aria-label="Market summary"
     >
-      {STATS.map(({ label, value, trend }) => (
-        <div key={label} className="flex shrink-0 items-center gap-2">
-          <span className="text-ink-faint">{label}</span>
-          <span className={`font-semibold ${trend === 'up' ? 'text-green-500' : 'text-ink'}`}>
-            {value}
+      {STATS.map((stat) => (
+        <div key={stat.label} className="flex shrink-0 items-center gap-2">
+          <span className="text-ink-faint">{stat.label}</span>
+          <span className={`font-semibold ${'trend' in stat && stat.trend === 'up' ? 'text-green-500' : 'text-ink'}`}>
+            {stat.value}
           </span>
         </div>
       ))}

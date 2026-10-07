@@ -96,6 +96,7 @@ export function TourGuide() {
   if (!mounted) return null;
 
   return (
+    // @ts-expect-error react-joyride types are slightly mismatched for v2 styles and disableBeacon
     <Joyride
       key={tourKey}
       steps={[
