@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { BrandMark } from "@/components/ui/BrandMark";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { MarketStrip } from "@/components/layout/MarketStrip";
 import { ROUTES, SCAN_SCHEDULE_LABEL } from "@/lib/constants";
 
@@ -20,13 +21,16 @@ export function AppHeader() {
             </span>
           </Link>
 
-          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line bg-surface px-2.5 py-1 text-[11px] font-medium text-ink-muted">
-            <span className="relative flex size-1.5" aria-hidden="true">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand opacity-60" />
-              <span className="relative inline-flex size-1.5 rounded-full bg-brand" />
+          <div className="flex items-center gap-3">
+            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line bg-surface px-2.5 py-1 text-[11px] font-medium text-ink-muted">
+              <span className="relative flex size-1.5" aria-hidden="true">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand opacity-60" />
+                <span className="relative inline-flex size-1.5 rounded-full bg-brand" />
+              </span>
+              {SCAN_SCHEDULE_LABEL}
             </span>
-            {SCAN_SCHEDULE_LABEL}
-          </span>
+            <ThemeToggle />
+          </div>
         </div>
 
         <MarketStrip />

@@ -5,24 +5,72 @@
    Source of truth: _internal_vault/Design_App_Guide.md (CoinGecko-style dark UI)
    ========================================================================== */
 
+@layer base {
+  :root {
+    color-scheme: light;
+    
+    /* Surfaces */
+    --canvas: #ffffff;
+    --surface: #f4f4f5;
+    --surface-hover: #e4e4e7;
+    --elevated: #ffffff;
+    --field: #e4e4e7;
+
+    /* Lines */
+    --line: #e4e4e7;
+    --line-strong: #d4d4d8;
+
+    /* Text */
+    --ink: #09090b;
+    --ink-muted: #71717a;
+    --ink-faint: #a1a1aa;
+
+    /* Skeleton colors */
+    --skeleton-field: #f4f4f5;
+    --skeleton-highlight: #e4e4e7;
+  }
+
+  .dark {
+    color-scheme: dark;
+    
+    /* Surfaces */
+    --canvas: #0a0a0a;
+    --surface: #141414;
+    --surface-hover: #1c1c1c;
+    --elevated: #1a1a1a;
+    --field: #262626;
+
+    /* Lines */
+    --line: #262626;
+    --line-strong: #333333;
+
+    /* Text */
+    --ink: #fafafa;
+    --ink-muted: #a3a3a3;
+    --ink-faint: #8a8a8a;
+
+    /* Skeleton colors */
+    --skeleton-field: #262626;
+    --skeleton-highlight: #313131;
+  }
+}
+
 @theme {
-  /* Surfaces */
-  --color-canvas: #0a0a0a;
-  --color-surface: #141414;
-  --color-surface-hover: #1c1c1c;
-  --color-elevated: #1a1a1a;
-  --color-field: #262626;
+  /* Dynamic colors */
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-elevated: var(--elevated);
+  --color-field: var(--field);
+  
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
 
-  /* Lines */
-  --color-line: #262626;
-  --color-line-strong: #333333;
-
-  /* Text */
-  --color-ink: #fafafa;
-  --color-ink-muted: #a3a3a3;
-  --color-ink-faint: #8a8a8a;
-
-  /* Brand + semantic accents */
+  /* Brand + semantic accents (Static across themes or adjust if needed) */
   --color-brand: #a3e635;
   --color-brand-strong: #84cc16;
   --color-up: #22c55e;
@@ -72,9 +120,9 @@
 @utility skeleton {
   background-image: linear-gradient(
     90deg,
-    var(--color-field) 25%,
-    #313131 50%,
-    var(--color-field) 75%
+    var(--skeleton-field) 25%,
+    var(--skeleton-highlight) 50%,
+    var(--skeleton-field) 75%
   );
   background-size: 200% 100%;
   animation: var(--animate-shimmer);

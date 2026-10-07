@@ -4,6 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { ArrowRight, Activity, Zap, Shield, ChevronRight } from "lucide-react";
 import { BrandMark } from "@/components/ui/BrandMark";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { APP_NAME, ROUTES } from "@/lib/constants";
 
 const Hero3D = dynamic(() => import("@/components/ui/Hero3D").then((mod) => mod.Hero3D), {
@@ -26,6 +27,7 @@ export default function LandingPage() {
             <span className="font-bold tracking-tight text-ink">{APP_NAME}</span>
           </div>
           <nav className="flex items-center gap-4">
+            <ThemeToggle />
             <Link
               href={ROUTES.home}
               className="group flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-canvas transition-transform hover:scale-105 active:scale-95"
@@ -54,14 +56,14 @@ export default function LandingPage() {
             {/* Seamless radial gradient to darken the area behind text without borders */}
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-canvas via-canvas/60 to-transparent opacity-80 pointer-events-none blur-xl"></div>
             
-            <h1 className="mb-6 text-4xl font-bold tracking-tight text-ink drop-shadow-[0_4px_12px_rgba(0,0,0,1)] sm:text-6xl">
+            <h1 className="mb-6 text-4xl font-bold tracking-tight text-ink drop-shadow-sm dark:drop-shadow-[0_4px_12px_rgba(0,0,0,1)] sm:text-6xl">
               Proactive Fundamental <br className="hidden sm:block" />
-              <span className="bg-gradient-to-r from-brand to-up bg-clip-text text-transparent drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
+              <span className="bg-gradient-to-r from-brand to-up bg-clip-text text-transparent drop-shadow-sm dark:drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
                 Market Intelligence
               </span>
             </h1>
 
-            <p className="mx-auto mb-10 max-w-2xl text-lg text-ink-muted drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] font-medium">
+            <p className="mx-auto mb-10 max-w-2xl text-lg text-ink-muted drop-shadow-sm dark:drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] font-medium">
               NusaSense detects fundamental stock anomalies on the Indonesia Stock
               Exchange (IDX) and pushes noise-free alerts to retail investors,
               helping you minimize cognitive bias.
