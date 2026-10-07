@@ -53,7 +53,7 @@ export default function HomePage() {
         description="Fundamental anomalies detected by the NusaSense engine across IDX-listed companies."
       />
 
-      <div className="mt-4 flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+      <div className="mt-4 flex gap-2 overflow-x-auto pb-2 scrollbar-hide" data-testid="filter-chips">
         {(['All', 'Anomalies', 'Watchlist'] as FilterType[]).map((f) => (
           <button
             key={f}

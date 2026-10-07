@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { HelpCircle } from "lucide-react";
 
 import { BrandMark } from "@/components/ui/BrandMark";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
@@ -21,14 +24,25 @@ export function AppHeader() {
             </span>
           </Link>
 
-          <div className="flex items-center gap-3">
-            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line bg-surface px-2.5 py-1 text-[11px] font-medium text-ink-muted">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span id="tour-scan-schedule" className="hidden sm:inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line bg-surface px-2.5 py-1 text-[11px] font-medium text-ink-muted">
               <span className="relative flex size-1.5" aria-hidden="true">
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand opacity-60" />
                 <span className="relative inline-flex size-1.5 rounded-full bg-brand" />
               </span>
               {SCAN_SCHEDULE_LABEL}
             </span>
+            <button
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new Event("start-nusa-tour"));
+                }
+              }}
+              className="flex size-9 items-center justify-center rounded-lg border border-transparent text-ink-muted transition-colors hover:bg-surface-hover hover:text-ink focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-canvas sm:border-line sm:bg-surface"
+              aria-label="Start interactive tour"
+            >
+              <HelpCircle className="size-[18px] sm:size-4" />
+            </button>
             <ThemeToggle />
           </div>
         </div>

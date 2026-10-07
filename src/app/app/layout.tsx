@@ -1,6 +1,7 @@
 import { AppHeader } from "@/components/layout/AppHeader";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { OnboardingModal } from "@/components/features/OnboardingModal";
+import { TourGuide } from "@/components/features/TourGuide";
 
 export default function AppLayout({
   children,
@@ -16,7 +17,7 @@ export default function AppLayout({
         Skip to content
       </a>
 
-      <div className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col sm:border-x sm:border-line relative pb-16">
+      <div className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col sm:border-x sm:border-line relative pb-16 md:max-w-3xl md:ml-32 lg:mx-auto lg:pl-0">
         <AppHeader />
         <main id="main" className="pb-safe-nav flex-1 px-4 pt-5">
           {children}
@@ -25,6 +26,7 @@ export default function AppLayout({
 
       <BottomNav />
       <OnboardingModal />
+      <TourGuide />
     </>
   );
 }
