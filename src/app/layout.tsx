@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 
 import { APP_NAME } from "@/lib/constants";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { ServiceWorkerProvider } from "@/components/providers/ServiceWorkerProvider";
+import { OfflineBanner } from "@/components/ui/OfflineBanner";
 import "./globals.css";
 
 const inter = Inter({
@@ -55,6 +57,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <body className="bg-canvas text-ink antialiased selection:bg-brand selection:text-canvas">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          <ServiceWorkerProvider />
+          <OfflineBanner />
           {children}
         </ThemeProvider>
       </body>
