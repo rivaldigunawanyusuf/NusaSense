@@ -8,8 +8,11 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest",
-    "test:ui": "vitest --ui"
+    "test:unit": "vitest run __tests__/unit",
+    "test:integration": "vitest run __tests__/integration src/lib/api",
+    "test:load": "node scripts/load-test.mjs",
+    "test:e2e": "playwright test",
+    "lhci": "lhci autorun"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
@@ -24,6 +27,8 @@
     "zustand": "^5.0.15"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/turbopack": "^4",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
@@ -36,6 +41,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
     "jsdom": "^29.1.1",
+    "msw": "^3.0.2",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vite": "^8.3.3",
