@@ -1,3 +1,9 @@
+# NusaSense
+
+NusaSense is an AI-driven proactive market intelligence Progressive Web App (PWA) that detects fundamental stock anomalies in the Indonesian market. Powered by the Sectors API, it automatically delivers noise-free push alerts to retail investors, helping to minimize cognitive bias in investment decisions.
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
