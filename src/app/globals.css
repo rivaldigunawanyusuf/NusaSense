@@ -79,6 +79,8 @@
   --color-up: #22c55e;
   --color-down: #f87171;
   --color-warn: #f59e0b;
+  --color-accent-info: #3b82f6;
+  --accent-info-rgb: 59, 130, 246;
 
   /* Layout */
   --spacing-nav: 4rem;

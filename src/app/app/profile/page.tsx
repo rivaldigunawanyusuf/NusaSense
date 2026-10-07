@@ -8,16 +8,16 @@ import { SettingsManager } from "@/components/features/SettingsManager";
 import { APP_VERSION } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Settings",
+  title: "Profile",
   description: "Manage NusaSense alert delivery, Telegram linking, and legal information.",
 };
 
-export default function SettingsPage() {
+export default function ProfilePage() {
   return (
     <>
       <PageHeader
         eyebrow="Preferences"
-        title="Settings"
+        title="Profile"
         description="Control how and where NusaSense delivers your signals."
       />
 

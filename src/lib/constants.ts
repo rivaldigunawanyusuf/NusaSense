@@ -7,8 +7,10 @@ export const SCAN_SCHEDULE_LABEL = "Daily scan · 06:00 WIB";
 export const ROUTES = {
   landing: "/",
   home: "/app",
+  market: "/app/market",
+  screener: "/app/screener",
   watchlist: "/app/watchlist",
-  settings: "/app/settings",
+  profile: "/app/profile",
 } as const;
 
 /** Maximum number of priority tickers a user may track (per PRD). */

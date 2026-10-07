@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { House, Settings, Star, type LucideIcon } from "lucide-react";
+import { House, Star, User, PieChart, Search, type LucideIcon } from "lucide-react";
 
 import { ROUTES } from "@/lib/constants";
 
@@ -10,12 +10,15 @@ interface NavItem {
   href: string;
   label: string;
   icon: LucideIcon;
+  isFab?: boolean;
 }
 
 const NAV_ITEMS: readonly NavItem[] = [
   { href: ROUTES.home, label: "Home", icon: House },
+  { href: ROUTES.market, label: "Market", icon: PieChart },
+  { href: ROUTES.screener, label: "Screener", icon: Search, isFab: true },
   { href: ROUTES.watchlist, label: "Watchlist", icon: Star },
-  { href: ROUTES.settings, label: "Settings", icon: Settings },
+  { href: ROUTES.profile, label: "Profile", icon: User },
 ];
 
 function isActive(pathname: string, href: string): boolean {
@@ -32,8 +35,28 @@ export function BottomNav() {
       className="pb-safe fixed inset-x-0 bottom-0 z-50 border-t border-line bg-canvas/85 backdrop-blur-xl md:inset-x-auto md:bottom-auto md:left-6 md:top-1/2 md:-translate-y-1/2 md:w-[80px] md:rounded-[40px] md:border md:border-line md:bg-surface/90 md:py-8 md:shadow-xl"
     >
       <ul className="mx-auto flex h-nav max-w-2xl flex-row justify-around md:h-auto md:w-full md:flex-col md:gap-8">
-        {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
+        {NAV_ITEMS.map(({ href, label, icon: Icon, isFab }) => {
           const active = isActive(pathname, href);
+
+          if (isFab) {
+            return (
+              <li key={href} className="relative group flex items-center justify-center w-full">
+                <Link
+                  href={href}
+                  id={`nav-${label.toLowerCase()}`}
+                  aria-current={active ? "page" : undefined}
+                  className="absolute -top-6 flex h-14 w-14 items-center justify-center rounded-full bg-accent-info text-white shadow-[0_4px_12px_rgba(var(--accent-info-rgb),0.4)] transition-transform hover:scale-105 active:scale-95 md:static md:h-14 md:w-14"
+                >
+                  <Icon aria-hidden="true" className="size-6" strokeWidth={2.5} />
+                </Link>
+                {/* Desktop Tooltip */}
+                <div className="pointer-events-none absolute left-full ml-4 top-1/2 z-[60] hidden -translate-y-1/2 whitespace-nowrap rounded-lg bg-ink px-3 py-1.5 text-xs font-semibold text-canvas opacity-0 transition-opacity group-hover:opacity-100 md:block">
+                  {label}
+                  <div className="absolute left-[-4px] top-1/2 -mt-1 border-[5px] border-transparent border-r-ink" />
+                </div>
+              </li>
+            );
+          }
 
           return (
             <li key={href} className="relative group flex items-center justify-center w-full">
@@ -49,7 +72,7 @@ export function BottomNav() {
                   aria-hidden="true"
                   className={`size-[22px] transition-transform duration-200 md:size-6 ${active ? "scale-105" : ""}`}
                   strokeWidth={active ? 2.25 : 1.75}
-                  fill={active && label === "Watchlist" ? "currentColor" : "none"}
+                  fill={active && (label === "Watchlist" || label === "User") ? "currentColor" : "none"}
                 />
                 <span className="md:hidden">{label}</span>
               </Link>
