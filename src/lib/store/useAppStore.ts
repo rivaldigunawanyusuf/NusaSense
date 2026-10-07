@@ -2,6 +2,12 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { sanitizeTicker } from '@/lib/utils/security';
 
+export interface UserRule {
+  id: string;
+  ruleString: string;
+  active: boolean;
+}
+
 export interface AppState {
   // Watchlist limits to max 5 items
   watchlist: string[];
@@ -9,12 +15,16 @@ export interface AppState {
     enabled: boolean;
   };
   hasOnboarded: boolean;
+  userRules: UserRule[];
   _hasHydrated: boolean;
 
   // Actions
   toggleWatchlist: (ticker: string) => void;
   setAlertsEnabled: (enabled: boolean) => void;
   completeOnboarding: () => void;
+  addUserRule: (rule: Omit<UserRule, 'id'>) => void;
+  removeUserRule: (id: string) => void;
+  toggleUserRule: (id: string) => void;
   setHasHydrated: (state: boolean) => void;
 }
 
@@ -26,6 +36,7 @@ export const useAppStore = create<AppState>()(
         enabled: false,
       },
       hasOnboarded: false,
+      userRules: [],
       _hasHydrated: false,
 
       toggleWatchlist: (ticker: string) => {
@@ -53,6 +64,23 @@ export const useAppStore = create<AppState>()(
 
       completeOnboarding: () => {
         set({ hasOnboarded: true });
+      },
+
+      addUserRule: (rule) => {
+        const id = crypto.randomUUID();
+        set((state) => ({ userRules: [...state.userRules, { ...rule, id }] }));
+      },
+
+      removeUserRule: (id: string) => {
+        set((state) => ({ userRules: state.userRules.filter((r) => r.id !== id) }));
+      },
+
+      toggleUserRule: (id: string) => {
+        set((state) => ({
+          userRules: state.userRules.map((r) =>
+            r.id === id ? { ...r, active: !r.active } : r
+          ),
+        }));
       },
 
       setHasHydrated: (state: boolean) => {
