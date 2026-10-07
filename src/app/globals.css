@@ -1,26 +1,145 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ==========================================================================
+   NusaSense Design Tokens
+   Source of truth: _internal_vault/Design_App_Guide.md (CoinGecko-style dark UI)
+   ========================================================================== */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  /* Surfaces */
+  --color-canvas: #0a0a0a;
+  --color-surface: #141414;
+  --color-surface-hover: #1c1c1c;
+  --color-elevated: #1a1a1a;
+  --color-field: #262626;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Lines */
+  --color-line: #262626;
+  --color-line-strong: #333333;
+
+  /* Text */
+  --color-ink: #fafafa;
+  --color-ink-muted: #a3a3a3;
+  --color-ink-faint: #8a8a8a;
+
+  /* Brand + semantic accents */
+  --color-brand: #a3e635;
+  --color-brand-strong: #84cc16;
+  --color-up: #22c55e;
+  --color-down: #f87171;
+  --color-warn: #f59e0b;
+
+  /* Layout */
+  --spacing-nav: 4rem;
+  --radius-card: 0.875rem;
+
+  /* Motion */
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+/* Tabular lining figures for every financial number (aligned columns). */
+@utility num {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* Bottom padding that clears the fixed bottom nav + iOS home indicator. */
+@utility pb-safe-nav {
+  padding-bottom: calc(var(--spacing-nav) + env(safe-area-inset-bottom) + 1.5rem);
+}
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@utility skeleton {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-field) 25%,
+    #313131 50%,
+    var(--color-field) 75%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    background-color: var(--color-canvas);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--color-brand) 35%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   App header: gains a border + shadow only once it is actually "stuck".
+   Progressive enhancement (scroll-state queries); other browsers keep a
+   plain sticky header, which is still fully usable.
+   ========================================================================== */
+
+.app-header {
+  container-type: scroll-state;
+  container-name: app-header;
+}
+
+@container app-header scroll-state(stuck: top) {
+  .app-header__inner {
+    border-color: var(--color-line-strong);
+    box-shadow: 0 8px 24px -12px rgb(0 0 0 / 0.8);
+  }
 }
