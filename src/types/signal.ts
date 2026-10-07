@@ -15,6 +15,17 @@ export interface SignalDeviation {
   direction: 'above' | 'below';
 }
 
+export interface HealthScore {
+  totalScore: number;
+  axes: {
+    valuation: number;
+    profitability: number;
+    growth: number;
+    liquidity: number;
+    solvency: number;
+  };
+}
+
 export interface SignalAlert {
   ticker: string;
   status: 'anomaly' | 'normal' | 'watchlist';
@@ -24,6 +35,8 @@ export interface SignalAlert {
   sparklineData: number[];
   detectedAt: string;
   disclaimer: string;
+  healthScore?: HealthScore;
+  isAnomaly?: boolean;
 }
 
 export interface MarketSummary {
