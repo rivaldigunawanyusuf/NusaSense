@@ -89,3 +89,100 @@ self.addEventListener('fetch', (event) => {
       })
   );
 });
+
+// Store user rules in SW memory
+let activeRules = [];
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SYNC_RULES') {
+    activeRules = event.data.payload || [];
+    // We could immediately run evaluation here, or wait for background sync
+    evaluateRulesAndNotify();
+  }
+});
+
+// Handle periodic background sync for daily evaluation
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag === 'daily-market-evaluation') {
+    event.waitUntil(evaluateRulesAndNotify());
+  }
+});
+
+// Simple evaluation logic (re-implemented for SW without imports)
+function evaluateRule(rule, metrics) {
+  if (!rule.active) return false;
+  const parts = rule.ruleString.split(' ');
+  if (parts.length !== 3) return false;
+  
+  const metricKey = parts[0];
+  const operator = parts[1];
+  const targetValue = parseFloat(parts[2]);
+  
+  if (isNaN(targetValue) || metrics[metricKey] == null) return false;
+  const actualValue = Number(metrics[metricKey]);
+  if (isNaN(actualValue)) return false;
+
+  switch (operator) {
+    case '<': return actualValue < targetValue;
+    case '>': return actualValue > targetValue;
+    case '=':
+    case '==': return actualValue === targetValue;
+    case '<=': return actualValue <= targetValue;
+    case '>=': return actualValue >= targetValue;
+    default: return false;
+  }
+}
+
+async function evaluateRulesAndNotify() {
+  if (!activeRules || activeRules.length === 0) return;
+
+  try {
+    // Fetch latest master data (mocked here as signals.json)
+    const response = await fetch('/data/signals.json');
+    if (!response.ok) return;
+    const data = await response.json();
+
+    const matches = [];
+
+    data.alerts.forEach(alert => {
+      // Check if alert matches any active user rule
+      const isMatch = activeRules.some(rule => evaluateRule(rule, alert.metrics));
+      if (isMatch) {
+        matches.push(alert);
+      }
+    });
+
+    // For demonstration, just notify about the first match to avoid spam
+    if (matches.length > 0) {
+      const match = matches[0];
+      const matchedRule = activeRules.find(r => evaluateRule(r, match.metrics));
+      
+      self.registration.showNotification('🎯 Rule Match: ' + match.ticker, {
+        body: `Triggered by rule: ${matchedRule?.ruleString || 'Custom Rule'}`,
+        icon: '/icon.jpg',
+        badge: '/icon.svg',
+        data: { url: '/app' }
+      });
+    }
+  } catch (error) {
+    console.error('Failed to evaluate rules in SW', error);
+  }
+}
+
+// Notification click handler
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(
+    clients.matchAll({ type: 'window' }).then((clientList) => {
+      const urlToOpen = new URL(event.notification.data.url, self.location.origin).href;
+      for (const client of clientList) {
+        if (client.url === urlToOpen && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(urlToOpen);
+      }
+    })
+  );
+});

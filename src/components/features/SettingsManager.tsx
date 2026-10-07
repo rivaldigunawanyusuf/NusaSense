@@ -15,7 +15,22 @@ export function SettingsManager() {
         description="Receive alerts in your browser"
         value={
           <button
-            onClick={() => setAlertsEnabled(!alertPrefs.enabled)}
+            onClick={async () => {
+              if (!alertPrefs.enabled) {
+                if ('Notification' in window) {
+                  const permission = await Notification.requestPermission();
+                  if (permission === 'granted') {
+                    setAlertsEnabled(true);
+                  } else {
+                    alert('Please allow notifications in your browser settings to enable this feature.');
+                  }
+                } else {
+                  alert('Your browser does not support push notifications.');
+                }
+              } else {
+                setAlertsEnabled(false);
+              }
+            }}
             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
               alertPrefs.enabled ? 'bg-brand' : 'bg-line-strong'
             }`}
