@@ -55,6 +55,12 @@ export function SignalCard({ signal, onClick }: SignalCardProps) {
       
       <div className="mt-2 flex justify-between text-xs text-ink-faint border-t border-line pt-3">
         <span>Score: {signal.healthScore ? signal.healthScore.totalScore : '-'}/100</span>
+        {signal.metrics?.bandarmologi_score != null && (
+          <span>Bandarmologi: {signal.metrics.bandarmologi_score}</span>
+        )}
+        {signal.metrics?.technical_rsi != null && (
+          <span>RSI: {signal.metrics.technical_rsi}</span>
+        )}
         <span>{new Date(signal.detectedAt).toLocaleDateString('en-ID', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
       </div>
     </div>
