@@ -44,8 +44,9 @@ export function BottomNav() {
                 <Link
                   href={href}
                   id={`nav-${label.toLowerCase()}`}
+                  aria-label={label}
                   aria-current={active ? "page" : undefined}
-                  className="absolute -top-6 flex h-14 w-14 items-center justify-center rounded-full bg-accent-info text-white shadow-[0_4px_12px_rgba(var(--accent-info-rgb),0.4)] transition-transform hover:scale-105 active:scale-95 md:static md:h-14 md:w-14"
+                  className="absolute -top-6 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-sectors-pink to-brand text-white shadow-lg shadow-brand/40 transition-transform hover:scale-105 active:scale-95 md:static md:h-14 md:w-14"
                 >
                   <Icon aria-hidden="true" className="size-6" strokeWidth={2.5} />
                 </Link>
@@ -63,6 +64,7 @@ export function BottomNav() {
               <Link
                 href={href}
                 id={`nav-${label.toLowerCase()}`}
+                aria-label={label}
                 aria-current={active ? "page" : undefined}
                 className={`relative flex min-h-12 w-[64px] flex-col items-center justify-center gap-1 rounded-2xl text-[11px] font-medium transition-all duration-300 md:h-14 md:w-14 md:text-xs ${
                   active ? "bg-brand/15 text-brand shadow-sm shadow-brand/5" : "text-ink-faint hover:bg-surface-hover hover:text-ink"
@@ -74,7 +76,7 @@ export function BottomNav() {
                   strokeWidth={active ? 2.25 : 1.75}
                   fill={active && (label === "Watchlist" || label === "User") ? "currentColor" : "none"}
                 />
-                <span className="md:hidden">{label}</span>
+                <span className="md:hidden" aria-hidden="true">{label}</span>
               </Link>
               
               {/* Desktop Tooltip */}
