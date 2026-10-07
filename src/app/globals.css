@@ -56,6 +56,8 @@
 }
 
 @theme {
+  --variant-dark: (&:where(.dark, .dark *));
+
   /* Dynamic colors */
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);

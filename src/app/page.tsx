@@ -53,17 +53,17 @@ export default function LandingPage() {
           <Hero3D />
 
           <div className="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8 relative z-10 py-12 sm:py-20 flex flex-col items-center justify-center">
-            {/* Seamless radial gradient to darken the area behind text without borders */}
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-canvas via-canvas/60 to-transparent opacity-80 pointer-events-none blur-xl"></div>
+            {/* Seamless radial gradient to darken the area behind text without borders (only in dark mode) */}
+            <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-canvas via-canvas/60 to-transparent opacity-80 pointer-events-none blur-xl"></div>
             
-            <h1 className="mb-6 text-4xl font-bold tracking-tight text-ink drop-shadow-sm dark:drop-shadow-[0_4px_12px_rgba(0,0,0,1)] sm:text-6xl">
+            <h1 className="mb-6 text-4xl font-bold tracking-tight text-ink dark:drop-shadow-[0_4px_12px_rgba(0,0,0,1)] sm:text-6xl">
               Proactive Fundamental <br className="hidden sm:block" />
-              <span className="bg-gradient-to-r from-brand to-up bg-clip-text text-transparent drop-shadow-sm dark:drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
+              <span className="bg-gradient-to-r from-brand to-up bg-clip-text text-transparent dark:drop-shadow-[0_4px_12px_rgba(0,0,0,1)]">
                 Market Intelligence
               </span>
             </h1>
 
-            <p className="mx-auto mb-10 max-w-2xl text-lg text-ink-muted drop-shadow-sm dark:drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] font-medium">
+            <p className="mx-auto mb-10 max-w-2xl text-lg text-ink-muted dark:drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] font-medium">
               NusaSense detects fundamental stock anomalies on the Indonesia Stock
               Exchange (IDX) and pushes noise-free alerts to retail investors,
               helping you minimize cognitive bias.
