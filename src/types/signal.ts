@@ -1,12 +1,17 @@
 export interface SignalMetrics {
   currentPE: number | null;
   historicalAvgPE: number | null;
+  pePeerAvg?: number | null;
   currentPBV: number | null;
   historicalAvgPBV: number | null;
+  pbPeerAvg?: number | null;
   dividendYield: number | null;
   historicalAvgDividendYield: number | null;
   revenueGrowthYoY: number | null;
   netProfitGrowthYoY: number | null;
+  marketCap?: number | null;
+  intrinsicValue?: number | null;
+  eps?: number | null;
 }
 
 export interface SignalDeviation {
