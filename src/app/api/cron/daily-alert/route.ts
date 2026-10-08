@@ -5,9 +5,10 @@ const prisma = new PrismaClient();
 
 export async function GET(req: Request) {
   try {
-    // Optional: secure this endpoint with a secret key so not just anyone can trigger it
-    const authHeader = req.headers.get("authorization");
-    if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    // Secure this endpoint with a secret key
+    const { searchParams } = new URL(req.url);
+    const secret = searchParams.get("secret");
+    if (secret !== (process.env.CRON_SECRET || "nusa123")) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
