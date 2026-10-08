@@ -1,0 +1,223 @@
+{
+  "name": "NusaSense - Daily Data Ingestion",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 6 * * *"
+            }
+          ]
+        }
+      },
+      "id": "1",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.sectors.app/v2/companies/?where=pe_ttm%3E0%20and%20pb_mrq%3E0%20and%20yield_ttm%3E0%20and%20market_cap%3E0&order_by=-market_cap&limit=50&include_query_values=true",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "id": "2",
+      "name": "Sectors API Request (Companies)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        450,
+        200
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Sectors API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.sectors.app/v2/index-daily/ihsg/",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "id": "5",
+      "name": "Sectors API Request (IHSG)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        450,
+        400
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Sectors API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "position"
+      },
+      "id": "6",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const companiesData = $items(\"Sectors API Request (Companies)\")[0].json;\nconst ihsgData = $items(\"Sectors API Request (IHSG)\")[0].json;\n\nconst ihsgValue = (Array.isArray(ihsgData) && ihsgData.length > 0) ? ihsgData[ihsgData.length - 1].price : 6050;\n\n// Assuming companiesData has { results: [...] }\nconst results = companiesData.results || [];\n\nconst transformedData = results.map(item => ({\n  symbol: item.symbol,\n  company_name: item.company_name,\n  pe: item.query_values ? item.query_values.pe_ttm : null,\n  pbv: item.query_values ? item.query_values.pb_mrq : null,\n  div_yield: item.query_values ? item.query_values.yield_ttm : null,\n  market_cap: item.query_values ? item.query_values.market_cap : null,\n}));\n\nreturn { \n  marketSummary: { \n    ihsgValue: ihsgValue, \n    ihsgChangePercent: 0, // Would need previous day to calculate\n    totalAnomalies: 0, \n    totalAnalyzed: transformedData.length,\n    lastUpdated: new Date().toISOString()\n  },\n  data: transformedData \n};"
+      },
+      "id": "3",
+      "name": "Transform Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "/var/www/nusasense/html/data/master_market_data.json",
+        "dataPropertyName": "data",
+        "options": {}
+      },
+      "id": "4",
+      "name": "Write master_market_data.json",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\nconst data = input.data || [];\n\n// Simple anomaly detection: PE < 10, PBV < 1, Div Yield > 5%\nconst anomalies = data.filter(d => d.pe > 0 && d.pe < 10 && d.pbv > 0 && d.pbv < 1 && d.div_yield > 0.05);\n\nif (anomalies.length === 0) return []; // Stop workflow if no anomalies\n\nlet message = `🚨 *NusaSense Anomaly Alert* 🚨\\n\\nWe detected ${anomalies.length} undervalued companies with high dividend yield:\\n\\n`;\n\nanomalies.forEach(a => {\n  message += `🔹 *${a.symbol}* (${a.company_name})\\n`;\n  message += `   - P/E: ${a.pe.toFixed(2)}\\n`;\n  message += `   - PBV: ${a.pbv.toFixed(2)}\\n`;\n  message += `   - Div Yield: ${(a.div_yield * 100).toFixed(2)}%\\n\\n`;\n});\n\nmessage += `_This is an automated alert from NusaSense._`;\n\nreturn [{ \n  json: { \n    text: message, \n    chatId: \"1278215193\" \n  } \n}];"
+      },
+      "id": "7",
+      "name": "Rule Engine (Detect Anomalies)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1050,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chatId }}",
+        "text": "={{ $json.text }}",
+        "parseMode": "Markdown",
+        "operation": "sendMessage"
+      },
+      "id": "8",
+      "name": "Telegram Push",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1250,
+        500
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Sectors API Request (Companies)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Sectors API Request (IHSG)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sectors API Request (Companies)": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sectors API Request (IHSG)": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Transform Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transform Data": {
+      "main": [
+        [
+          {
+            "node": "Write master_market_data.json",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Rule Engine (Detect Anomalies)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rule Engine (Detect Anomalies)": {
+      "main": [
+        [
+          {
+            "node": "Telegram Push",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
