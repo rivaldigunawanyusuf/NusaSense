@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: Request) {
   try {
     // Secure this endpoint with a secret key
@@ -23,7 +25,8 @@ export async function GET(req: Request) {
     const response = await fetch(
       "https://api.sectors.app/v2/companies/?where=pe_ttm>0 and pb_mrq>0 and yield_ttm>-1 and market_cap>0&order_by=-market_cap&limit=30&include_query_values=true",
       {
-        headers: { "Authorization": SECTORS_API_KEY }
+        headers: { "Authorization": SECTORS_API_KEY },
+        cache: 'no-store'
       }
     );
 
