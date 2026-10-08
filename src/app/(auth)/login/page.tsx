@@ -2,9 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Apple, Chrome } from "lucide-react";
+import { useAppStore } from "@/lib/store/useAppStore";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { login } = useAppStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -28,6 +32,8 @@ export default function LoginPage() {
       return;
     }
     console.log("Login submitted", { email, password });
+    login({ name: "Demo User", email });
+    router.push("/app");
   };
 
   return (

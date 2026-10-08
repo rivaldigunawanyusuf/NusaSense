@@ -2,9 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Apple, Chrome } from "lucide-react";
+import { useAppStore } from "@/lib/store/useAppStore";
 
 export default function RegisterPage() {
+  const router = useRouter();
+  const { login } = useAppStore();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +28,8 @@ export default function RegisterPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Register submitted", { name, email, password, confirmPassword, agreeTerms });
+    login({ name: name || "Demo User", email });
+    router.push("/app");
   };
 
   return (

@@ -9,6 +9,10 @@ export interface UserRule {
 }
 
 export interface AppState {
+  // Auth state
+  isAuthenticated: boolean;
+  user: { name: string; email: string } | null;
+
   // Watchlist limits to max 5 items
   watchlist: string[];
   alertPrefs: {
@@ -19,6 +23,8 @@ export interface AppState {
   _hasHydrated: boolean;
 
   // Actions
+  login: (user: { name: string; email: string }) => void;
+  logout: () => void;
   toggleWatchlist: (ticker: string) => void;
   setAlertsEnabled: (enabled: boolean) => void;
   completeOnboarding: () => void;
@@ -31,6 +37,8 @@ export interface AppState {
 export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
+      isAuthenticated: false,
+      user: null,
       watchlist: [],
       alertPrefs: {
         enabled: false,
@@ -38,6 +46,9 @@ export const useAppStore = create<AppState>()(
       hasOnboarded: false,
       userRules: [],
       _hasHydrated: false,
+
+      login: (user) => set({ isAuthenticated: true, user }),
+      logout: () => set({ isAuthenticated: false, user: null }),
 
       toggleWatchlist: (ticker: string) => {
         const clean = sanitizeTicker(ticker);

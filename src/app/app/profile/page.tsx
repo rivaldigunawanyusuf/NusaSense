@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CalendarClock, Database, Info, Send } from "lucide-react";
+import { ProtectedRoute } from "@/components/layout/ProtectedRoute";
 
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Disclaimer } from "@/components/legal/Disclaimer";
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function ProfilePage() {
   return (
-    <>
+    <ProtectedRoute>
       <PageHeader
         eyebrow="Preferences"
         title="Profile"
@@ -50,6 +51,6 @@ export default function ProfilePage() {
         </h2>
         <Disclaimer />
       </section>
-    </>
+    </ProtectedRoute>
   );
 }

@@ -6,13 +6,10 @@ import { useAppStore } from "@/lib/store/useAppStore";
 import { EmptyState } from "@/components/ui/EmptyState";
 
 const AVAILABLE_METRICS = [
-  { id: "currentPE", label: "P/E Ratio" },
-  { id: "currentPBV", label: "PBV Ratio" },
-  { id: "dividendYield", label: "Dividend Yield (%)" },
-  { id: "revenueGrowthYoY", label: "Revenue Growth (%)" },
-  { id: "netProfitGrowthYoY", label: "Net Profit Growth (%)" },
-  { id: "bandarmologi_score", label: "Bandarmologi Score" },
-  { id: "technical_rsi", label: "Technical RSI" },
+  { id: "pe", label: "P/E Ratio" },
+  { id: "pbv", label: "PBV Ratio" },
+  { id: "div_yield", label: "Dividend Yield (%)" },
+  { id: "bandarmologi", label: "Bandarmologi/Volume Score" },
 ];
 
 const OPERATORS = [
