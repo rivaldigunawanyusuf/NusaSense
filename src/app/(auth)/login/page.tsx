@@ -68,7 +68,7 @@ export default function LoginPage() {
             className={`h-11 rounded-lg bg-[#262626] px-4 text-white outline-none transition-all ${
               emailError 
                 ? "ring-1 ring-red-500 focus:ring-red-500" 
-                : "border border-transparent focus:ring-1 focus:ring-lime-500"
+                : "border border-transparent focus:ring-1 focus:ring-brand"
             }`}
           />
           {emailError && (
@@ -81,7 +81,7 @@ export default function LoginPage() {
             <label htmlFor="password" className="text-sm font-medium text-neutral-200">
               Password
             </label>
-            <Link href="#" className="text-xs font-medium text-lime-500 transition-colors hover:text-lime-400">
+            <Link href="#" className="text-xs font-medium text-brand transition-colors hover:text-brand-strong">
               Forgot password?
             </Link>
           </div>
@@ -91,46 +91,21 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
-            className="h-11 rounded-lg border border-transparent bg-[#262626] px-4 text-white outline-none transition-all focus:ring-1 focus:ring-lime-500"
+            className="h-11 rounded-lg border border-transparent bg-[#262626] px-4 text-white outline-none transition-all focus:ring-1 focus:ring-brand"
           />
         </div>
 
         <button
           type="submit"
-          className="mt-2 h-11 w-full rounded-lg bg-lime-500 font-semibold text-black transition-colors hover:bg-lime-400 active:bg-lime-600"
+          className="mt-2 h-11 w-full rounded-lg bg-brand font-semibold text-canvas transition-colors hover:bg-brand-strong"
         >
           Sign In
         </button>
       </form>
 
-      <div className="relative flex items-center py-2">
-        <div className="flex-grow border-t border-neutral-800"></div>
-        <span className="shrink-0 px-4 text-xs tracking-wider text-neutral-500 uppercase">Or continue with</span>
-        <div className="flex-grow border-t border-neutral-800"></div>
-      </div>
-
-      <div className="flex flex-col gap-3">
-        <button
-          type="button"
-          className="flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-white font-semibold text-black transition-colors hover:bg-neutral-200"
-        >
-          <Apple className="size-5" />
-          <span>Sign in with Apple</span>
-        </button>
-        
-        <button
-          type="button"
-          onClick={() => signIn("google", { callbackUrl: "/app" })}
-          className="flex h-11 w-full items-center justify-center gap-2 rounded-lg border border-neutral-700 bg-transparent font-semibold text-white transition-colors hover:bg-neutral-800"
-        >
-          <Globe className="size-5 text-neutral-300" />
-          <span>Sign in with Google</span>
-        </button>
-      </div>
-
-      <p className="mt-2 text-center text-sm text-neutral-400">
+      <p className="mt-6 text-center text-sm text-neutral-400">
         Don&apos;t have an account?{" "}
-        <Link href="/register" className="font-semibold text-lime-500 transition-colors hover:text-lime-400">
+        <Link href="/register" className="font-semibold text-brand transition-colors hover:text-brand-strong">
           Sign up
         </Link>
       </p>
