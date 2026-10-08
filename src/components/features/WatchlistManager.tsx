@@ -6,9 +6,11 @@ import { useAppStore } from '@/lib/store/useAppStore';
 import { sanitizeTicker } from '@/lib/utils/security';
 import { WATCHLIST_LIMIT } from '@/lib/constants';
 import { EmptyState } from '../ui/EmptyState';
+import { useMarketData } from '@/lib/hooks/useMarketData';
 
 export function WatchlistManager() {
   const { watchlist, toggleWatchlist, _hasHydrated } = useAppStore();
+  const { marketData } = useMarketData();
   const [mounted, setMounted] = useState(false);
   const [displayValue, setDisplayValue] = useState('');
   const [inputValue, setInputValue] = useState('');
@@ -53,6 +55,23 @@ export function WatchlistManager() {
     setInputValue('');
   };
 
+  const handleSelectRecommendation = (ticker: string) => {
+    if (watchlist.length >= WATCHLIST_LIMIT) {
+      setErrorMsg(`Watchlist limit reached (${WATCHLIST_LIMIT} max).`);
+      return;
+    }
+    if (!watchlist.includes(ticker)) {
+      toggleWatchlist(ticker);
+    }
+    setDisplayValue('');
+    setInputValue('');
+  };
+
+  const availableTickers = marketData?.alerts.map(a => a.ticker) || [];
+  const recommendations = displayValue.trim() 
+    ? availableTickers.filter(t => t.toLowerCase().includes(displayValue.toLowerCase()) && !watchlist.includes(t))
+    : [];
+
   return (
     <div className="flex flex-col gap-6">
       <form onSubmit={handleAdd} className="flex gap-2">
@@ -65,6 +84,24 @@ export function WatchlistManager() {
             className="w-full rounded-full border border-line bg-surface px-4 py-2.5 text-sm text-ink placeholder:text-ink-faint focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand uppercase"
             maxLength={5}
           />
+          {recommendations.length > 0 && (
+            <div className="absolute top-full left-0 right-0 mt-2 z-50 overflow-hidden rounded-xl border border-line bg-surface shadow-lg">
+              <ul className="max-h-48 overflow-y-auto">
+                {recommendations.map((ticker) => (
+                  <li key={ticker}>
+                    <button
+                      type="button"
+                      onClick={() => handleSelectRecommendation(ticker)}
+                      className="w-full px-4 py-2.5 text-left text-sm text-ink hover:bg-field transition-colors flex items-center justify-between"
+                    >
+                      <span className="font-semibold">{ticker}</span>
+                      <Plus className="size-4 text-ink-faint" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <button
           type="submit"
