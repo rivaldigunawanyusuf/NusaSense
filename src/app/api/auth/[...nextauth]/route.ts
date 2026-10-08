@@ -19,12 +19,11 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         // Dummy credential verification for testing/demo purposes.
-        // In a real app, hash and compare passwords here using bcrypt.
-        if (credentials?.email === "demo@nusasense.com" && credentials?.password === "password") {
+        if (credentials?.email === "rivaldigunawanyusuf@gmail.com" && credentials?.password === "password123") {
           let user = await prisma.user.findUnique({ where: { email: credentials.email } });
           if (!user) {
             user = await prisma.user.create({
-              data: { email: credentials.email, name: "Demo User" }
+              data: { email: credentials.email, name: "Rivaldi Gunawan Yusuf" }
             });
           }
           return user;
