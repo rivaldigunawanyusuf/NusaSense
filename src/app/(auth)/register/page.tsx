@@ -16,6 +16,7 @@ export default function RegisterPage() {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordMatchError, setPasswordMatchError] = useState(false);
 
   // Password strength calculation
   const getPasswordStrength = () => {
@@ -29,6 +30,11 @@ export default function RegisterPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setPasswordMatchError(true);
+      return;
+    }
+    setPasswordMatchError(false);
     console.log("Register submitted", { name, email, password, confirmPassword, agreeTerms });
     login({ name: name || "Demo User", email });
     router.push("/app");
@@ -126,6 +132,9 @@ export default function RegisterPage() {
               {showConfirmPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
             </button>
           </div>
+          {passwordMatchError && (
+            <span className="text-xs text-red-500">Passwords do not match</span>
+          )}
         </div>
 
         <div className="flex items-start gap-2 pt-1">
