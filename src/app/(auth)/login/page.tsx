@@ -4,14 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Apple, Globe } from "lucide-react";
-import { useAppStore } from "@/lib/store/useAppStore";
+import { signIn } from "next-auth/react";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login } = useAppStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -25,15 +25,26 @@ export default function LoginPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || emailError) {
       setEmailError(true);
       return;
     }
-    console.log("Login submitted", { email, password });
-    login({ name: "Demo User", email });
-    router.push("/app");
+    setLoading(true);
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+    
+    setLoading(false);
+    
+    if (res?.error) {
+      alert("Invalid credentials. Try demo@nusasense.com / password");
+    } else {
+      router.push("/app");
+    }
   };
 
   return (
@@ -109,6 +120,7 @@ export default function LoginPage() {
         
         <button
           type="button"
+          onClick={() => signIn("google", { callbackUrl: "/app" })}
           className="flex h-11 w-full items-center justify-center gap-2 rounded-lg border border-neutral-700 bg-transparent font-semibold text-white transition-colors hover:bg-neutral-800"
         >
           <Globe className="size-5 text-neutral-300" />

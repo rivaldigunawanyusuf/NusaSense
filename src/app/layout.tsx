@@ -49,6 +49,8 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
+import { NextAuthProvider } from "@/components/providers/NextAuthProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -57,11 +59,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <body className="bg-canvas text-ink antialiased selection:bg-brand selection:text-canvas">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <ServiceWorkerProvider />
-          <OfflineBanner />
-          {children}
-        </ThemeProvider>
+        <NextAuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+            <ServiceWorkerProvider />
+            <OfflineBanner />
+            {children}
+          </ThemeProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

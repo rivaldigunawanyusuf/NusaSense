@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAppStore } from "@/lib/store/useAppStore";
+import { useSession } from "next-auth/react";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { isAuthenticated, _hasHydrated } = useAppStore();
+  const { status } = useSession();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -14,12 +14,12 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (isMounted && _hasHydrated && !isAuthenticated) {
+    if (isMounted && status === "unauthenticated") {
       router.push("/login");
     }
-  }, [isAuthenticated, _hasHydrated, isMounted, router]);
+  }, [status, isMounted, router]);
 
-  if (!isMounted || !_hasHydrated) {
+  if (!isMounted || status === "loading") {
     return (
       <div className="flex w-full items-center justify-center p-10">
         <div className="size-8 animate-spin rounded-full border-4 border-neutral-800 border-t-lime-500"></div>
@@ -27,7 +27,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
     );
   }
 
-  if (!isAuthenticated) {
+  if (status === "unauthenticated") {
     return null;
   }
 
