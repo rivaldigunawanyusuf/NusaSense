@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Apple, Globe } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useAppStore } from "@/lib/store/useAppStore";
 
 export default function RegisterPage() {
@@ -14,6 +14,8 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreeTerms, setAgreeTerms] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // Password strength calculation
   const getPasswordStrength = () => {
@@ -72,14 +74,23 @@ export default function RegisterPage() {
           <label htmlFor="password" className="text-sm font-medium text-neutral-200">
             Password
           </label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••"
-            className="h-11 rounded-lg border border-transparent bg-[#262626] px-4 text-white outline-none transition-all focus:border-transparent focus:ring-1 focus:ring-brand"
-          />
+          <div className="relative">
+            <input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              className="h-11 w-full rounded-lg border border-transparent bg-[#262626] px-4 pr-10 text-white outline-none transition-all focus:border-transparent focus:ring-1 focus:ring-brand"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white focus:outline-none"
+            >
+              {showPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
+            </button>
+          </div>
           
           {/* Password Strength Indicator */}
           <div className="mt-1 flex gap-1">
@@ -98,14 +109,23 @@ export default function RegisterPage() {
           <label htmlFor="confirmPassword" className="text-sm font-medium text-neutral-200">
             Confirm Password
           </label>
-          <input
-            id="confirmPassword"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="••••••••"
-            className="h-11 rounded-lg border border-transparent bg-[#262626] px-4 text-white outline-none transition-all focus:border-transparent focus:ring-1 focus:ring-brand"
-          />
+          <div className="relative">
+            <input
+              id="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="••••••••"
+              className="h-11 w-full rounded-lg border border-transparent bg-[#262626] px-4 pr-10 text-white outline-none transition-all focus:border-transparent focus:ring-1 focus:ring-brand"
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white focus:outline-none"
+            >
+              {showConfirmPassword ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
+            </button>
+          </div>
         </div>
 
         <div className="flex items-start gap-2 pt-1">
