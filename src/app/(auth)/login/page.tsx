@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Apple, Chrome } from "lucide-react";
+import { Apple, Globe } from "lucide-react";
 import { useAppStore } from "@/lib/store/useAppStore";
 
 export default function LoginPage() {
@@ -111,7 +111,7 @@ export default function LoginPage() {
           type="button"
           className="flex h-11 w-full items-center justify-center gap-2 rounded-lg border border-neutral-700 bg-transparent font-semibold text-white transition-colors hover:bg-neutral-800"
         >
-          <Chrome className="size-5 text-neutral-300" />
+          <Globe className="size-5 text-neutral-300" />
           <span>Sign in with Google</span>
         </button>
       </div>
