@@ -1,42 +1,50 @@
-# NusaSense
+# NusaSense 🇮🇩
 
-NusaSense is an AI-driven proactive market intelligence Progressive Web App (PWA) that detects fundamental stock anomalies in the Indonesian market. Powered by the Sectors API, it automatically delivers noise-free push alerts to retail investors, helping to minimize cognitive bias in investment decisions.
+NusaSense is an AI-driven proactive market intelligence Progressive Web App (PWA) that detects fundamental stock anomalies in the Indonesian market (IHSG). Powered by the Sectors API, it automatically delivers noise-free push alerts and Telegram notifications to retail investors, helping to minimize cognitive bias in investment decisions.
 
----
+![NusaSense Preview](public/icon.png)
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🚀 Key Features
+- **Screener & Anomaly Detection:** Deep fundamental analysis powered by the Sectors API.
+- **Watchlist & User Settings:** Seamless user management stored in a relational database.
+- **Cross-Platform PWA:** Optimized for mobile and desktop with offline support.
+- **Automated Alerts:** Get notified via Telegram bot or Web Push Notifications.
+- **Enterprise-Grade Security:** OWASP-compliant headers, strict CSP, and robust route protection.
 
-## Getting Started
+## 🏗️ Architecture & Tech Stack
 
-First, run the development server:
+NusaSense is designed for independent self-hosting on a **Virtual Private Server (VPS)** to maximize control and achieve a zero-cost infrastructure footprint, migrating entirely away from serverless platforms like Vercel and Firebase.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework:** [Next.js (App Router)](https://nextjs.org/) with Server-Side Rendering (SSR).
+- **Authentication:** [NextAuth.js](https://next-auth.js.org/) (Google OAuth & Credentials).
+- **Database & ORM:** [PostgreSQL](https://www.postgresql.org/) managed by [Prisma](https://www.prisma.io/) (SQLite for local development).
+- **Data Pipeline:** [n8n](https://n8n.io/) for cron jobs and Telegram bot automation.
+- **Web Server:** [Nginx](https://www.nginx.com/) acting as a reverse proxy.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Local Development Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To test and develop NusaSense locally using SQLite:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-## Learn More
+2. **Setup the Database (Prisma):**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. **Run the Development Server:**
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 VPS Deployment (Production)
 
-## Deploy on Vercel
+Deployment is managed via Docker Compose on Ubuntu/Debian. 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ensure you have your `.env` configured with the correct `DATABASE_URL` pointing to your PostgreSQL instance, and use PM2 or Docker to run the Next.js production build (`npm run build && npm start`). Nginx will handle SSL and route traffic accordingly.
