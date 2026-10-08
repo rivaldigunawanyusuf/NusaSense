@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import { CalendarClock, Database, Info, Send } from "lucide-react";
 import { ProtectedRoute } from "@/components/layout/ProtectedRoute";
 
@@ -7,11 +8,6 @@ import { Disclaimer } from "@/components/legal/Disclaimer";
 import { ListGroup, ListRow } from "@/components/ui/ListGroup";
 import { SettingsManager } from "@/components/features/SettingsManager";
 import { APP_VERSION } from "@/lib/constants";
-
-export const metadata: Metadata = {
-  title: "Profile",
-  description: "Manage NusaSense alert delivery, Telegram linking, and legal information.",
-};
 
 export default function ProfilePage() {
   return (
