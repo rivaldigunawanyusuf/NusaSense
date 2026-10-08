@@ -98,7 +98,8 @@ export function SettingsManager() {
               )}
             </div>
             <p className="text-[10px] text-neutral-400">
-              Find ID by <a href="https://t.me/userinfobot" target="_blank" rel="noreferrer" className="text-brand hover:underline font-semibold">clicking here (@userinfobot)</a>. Then start <a href="https://t.me/NusaSenseBot" target="_blank" rel="noreferrer" className="text-brand hover:underline">@NusaSenseBot</a>.
+              1. Find ID by <a href="https://t.me/userinfobot" target="_blank" rel="noreferrer" className="text-brand hover:underline font-semibold">clicking here (@userinfobot)</a>.<br/>
+              2. Then, <a href="https://t.me/NusaSenseBot" target="_blank" rel="noreferrer" className="text-brand hover:underline font-semibold">click here (@NusaSenseBot)</a> and press <b>/start</b>.
             </p>
           </div>
         }
