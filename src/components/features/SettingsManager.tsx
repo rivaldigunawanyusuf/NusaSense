@@ -6,7 +6,7 @@ import { useAppStore } from '@/lib/store/useAppStore';
 import { ListGroup, ListRow } from '../ui/ListGroup';
 
 export function SettingsManager() {
-  const { alertPrefs, setAlertsEnabled, _hasHydrated } = useAppStore();
+  const { alertPrefs, setAlertsEnabled, setTelegramChatId, _hasHydrated } = useAppStore();
   const [mounted, setMounted] = useState(false);
   
   useEffect(() => setMounted(true), []);
@@ -53,9 +53,29 @@ export function SettingsManager() {
         label="Telegram"
         description="Receive anomaly alerts in your Telegram chat"
         value={
-          <span className="rounded-full border border-line-strong px-2 py-0.5 text-xs text-ink-faint">
-            Not linked
-          </span>
+          <div className="flex items-center gap-2">
+            <input 
+              type="text" 
+              placeholder="Chat ID (e.g. 123456789)"
+              value={alertPrefs.telegramChatId || ''}
+              onChange={(e) => setTelegramChatId(e.target.value)}
+              className="h-8 rounded-md border border-line bg-canvas px-2 text-xs text-ink outline-none focus:border-brand w-32"
+            />
+            {alertPrefs.telegramChatId ? (
+               <span className="rounded-full border border-brand/30 bg-brand/10 px-2 py-0.5 text-xs text-brand font-medium">
+                 Linked
+               </span>
+            ) : (
+               <a 
+                 href="https://t.me/NusaSenseBot" 
+                 target="_blank" 
+                 rel="noreferrer"
+                 className="text-xs text-brand hover:underline"
+               >
+                 Get ID
+               </a>
+            )}
+          </div>
         }
       />
     </ListGroup>

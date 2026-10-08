@@ -17,6 +17,7 @@ export interface AppState {
   watchlist: string[];
   alertPrefs: {
     enabled: boolean;
+    telegramChatId: string | null;
   };
   hasOnboarded: boolean;
   userRules: UserRule[];
@@ -27,6 +28,7 @@ export interface AppState {
   logout: () => void;
   toggleWatchlist: (ticker: string) => void;
   setAlertsEnabled: (enabled: boolean) => void;
+  setTelegramChatId: (id: string | null) => void;
   completeOnboarding: () => void;
   addUserRule: (rule: Omit<UserRule, 'id'>) => void;
   removeUserRule: (id: string) => void;
@@ -42,6 +44,7 @@ export const useAppStore = create<AppState>()(
       watchlist: [],
       alertPrefs: {
         enabled: false,
+        telegramChatId: null,
       },
       hasOnboarded: false,
       userRules: [],
@@ -70,7 +73,11 @@ export const useAppStore = create<AppState>()(
       },
 
       setAlertsEnabled: (enabled: boolean) => {
-        set({ alertPrefs: { enabled } });
+        set((state) => ({ alertPrefs: { ...state.alertPrefs, enabled } }));
+      },
+
+      setTelegramChatId: (id: string | null) => {
+        set((state) => ({ alertPrefs: { ...state.alertPrefs, telegramChatId: id } }));
       },
 
       completeOnboarding: () => {
