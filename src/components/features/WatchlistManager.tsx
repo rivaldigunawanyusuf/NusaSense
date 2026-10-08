@@ -31,7 +31,7 @@ export function WatchlistManager() {
     e.preventDefault();
     setErrorMsg('');
 
-    const clean = sanitizeTicker(inputValue); // Uses the debounced value
+    const clean = sanitizeTicker(displayValue); // Use immediate value instead of debounced
     if (!clean) {
       setErrorMsg('Invalid ticker format. Use 1-5 letters (e.g. BBCA).');
       return;
@@ -68,7 +68,7 @@ export function WatchlistManager() {
         </div>
         <button
           type="submit"
-          disabled={!inputValue.trim() || watchlist.length >= WATCHLIST_LIMIT}
+          disabled={!displayValue.trim() || watchlist.length >= WATCHLIST_LIMIT}
           className="flex shrink-0 items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-strong disabled:opacity-50"
         >
           <Plus className="size-5" />
