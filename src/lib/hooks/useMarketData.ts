@@ -9,7 +9,7 @@ const fetcher = (url: string) => fetch(url).then((res) => {
 
 export function useMarketData() {
   const { data, error, isLoading, isValidating } = useSWR(
-    '/data/master_market_data.json',
+    '/api/signals',
     fetcher,
     {
       refreshInterval: 0,

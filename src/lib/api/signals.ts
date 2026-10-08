@@ -39,7 +39,7 @@ export async function fetchSignals(timeoutMs = 5000): Promise<SignalBatch> {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeoutMs);
   
-  const url = process.env.NEXT_PUBLIC_SIGNALS_URL || '/data/signals.json';
+  const url = process.env.NEXT_PUBLIC_SIGNALS_URL || '/api/signals';
 
   try {
     const res = await fetch(url, {
