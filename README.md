@@ -43,6 +43,11 @@ To test and develop NusaSense locally using SQLite:
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+## 📚 Documentation
+For an in-depth understanding of the platform, please refer to our internal documentation:
+- [Features & Business Specs](docs/FEATURES.md) - Deep dive into product vision, core features, and monetization strategies.
+- [Developer Guide](docs/DEVELOPER_GUIDE.md) - Complete onboarding instructions for new engineers, including environment setup and contribution guidelines.
+
 ## 📦 VPS Deployment (Production)
 
 Deployment is managed via Docker Compose on Ubuntu/Debian. 
