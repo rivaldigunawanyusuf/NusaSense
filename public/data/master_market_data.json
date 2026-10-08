@@ -1,0 +1,411 @@
+{
+  "marketSummary": {
+    "ihsgValue": 6146.724,
+    "ihsgChangePercent": 0,
+    "totalAnomalies": 0,
+    "totalAnalyzed": 50,
+    "lastUpdated": "2026-10-08T14:32:22.893Z"
+  },
+  "data": [
+    {
+      "symbol": "BBCA.JK",
+      "company_name": "PT Bank Central Asia Tbk.",
+      "pe": 12.7048272325959,
+      "pbv": 2.73022711190288,
+      "div_yield": 0.0629752066115702,
+      "market_cap": 738355911975000
+    },
+    {
+      "symbol": "BBRI.JK",
+      "company_name": "PT Bank Rakyat Indonesia (Persero) Tbk",
+      "pe": 7.55964761540832,
+      "pbv": 1.46350536838833,
+      "div_yield": 0.110191082802548,
+      "market_cap": 471136312383180
+    },
+    {
+      "symbol": "BYAN.JK",
+      "company_name": "Bayan Resources Tbk",
+      "pe": 29.5381709157611,
+      "pbv": 9.41761707711214,
+      "div_yield": 0.0212976098535545,
+      "market_cap": 418333354250000
+    },
+    {
+      "symbol": "BREN.JK",
+      "company_name": "PT Barito Renewables Energy Tbk.",
+      "pe": 144.748275615987,
+      "pbv": 30.6250824964147,
+      "div_yield": 0.00143624556692023,
+      "market_cap": 381290727000000
+    },
+    {
+      "symbol": "BMRI.JK",
+      "company_name": "PT Bank Mandiri (Persero) Tbk",
+      "pe": 5.41242719491217,
+      "pbv": 1.33116227801642,
+      "div_yield": 0.13242851443407,
+      "market_cap": 378839999983600
+    },
+    {
+      "symbol": "TLKM.JK",
+      "company_name": "PT Telkom Indonesia (Persero) Tbk",
+      "pe": 13.1046684426755,
+      "pbv": 1.93381153478742,
+      "div_yield": 0.0966086053228998,
+      "market_cap": 228833720346000
+    },
+    {
+      "symbol": "ASII.JK",
+      "company_name": "Astra International Tbk",
+      "pe": 6.49650464998825,
+      "pbv": 0.841105168946572,
+      "div_yield": 0.0815899581589958,
+      "market_cap": 193511384009200
+    },
+    {
+      "symbol": "TPIA.JK",
+      "company_name": "PT Chandra Asri Pacific Tbk",
+      "pe": 71.8288760938052,
+      "pbv": 2.10511979995833,
+      "div_yield": 0.00574846958768541,
+      "market_cap": 149232415283700
+    },
+    {
+      "symbol": "BRPT.JK",
+      "company_name": "Barito Pacific Tbk",
+      "pe": 53.904017195965,
+      "pbv": 3.07753680821796,
+      "div_yield": 0.00113986013652561,
+      "market_cap": 134058521802920
+    },
+    {
+      "symbol": "UNTR.JK",
+      "company_name": "United Tractors Tbk",
+      "pe": 12.3822391545621,
+      "pbv": 0.979138832204006,
+      "div_yield": 0.0825641025641026,
+      "market_cap": 94558925697600
+    },
+    {
+      "symbol": "AADI.JK",
+      "company_name": "PT Adaro Andalan Indonesia Tbk",
+      "pe": 6.78604672907035,
+      "pbv": 1.46708485433229,
+      "div_yield": 0.0444694228999871,
+      "market_cap": 94221390296000
+    },
+    {
+      "symbol": "PANI.JK",
+      "company_name": "PT Pantai Indah Kapuk Dua Tbk.",
+      "pe": 33.7871233543071,
+      "pbv": 2.93465374597345,
+      "div_yield": 0.00106382978723404,
+      "market_cap": 85490660330600
+    },
+    {
+      "symbol": "ICBP.JK",
+      "company_name": "Indofood CBP Sukses Makmur Tbk",
+      "pe": 10.6894403095076,
+      "pbv": 1.49735452245282,
+      "div_yield": 0.0391143911439114,
+      "market_cap": 79009426700000
+    },
+    {
+      "symbol": "ANTM.JK",
+      "company_name": "Aneka Tambang Tbk.",
+      "pe": 8.72024874163722,
+      "pbv": 2.08262267649317,
+      "div_yield": 0.0650119698822683,
+      "market_cap": 77619370061750
+    },
+    {
+      "symbol": "ADRO.JK",
+      "company_name": "Alamtri Resources Indonesia Tbk",
+      "pe": 7.50673429174899,
+      "pbv": 0.907690151651516,
+      "div_yield": 0.0558230766883263,
+      "market_cap": 74881284920000
+    },
+    {
+      "symbol": "HMSP.JK",
+      "company_name": "HM Sampoerna Tbk",
+      "pe": 8.37998283660077,
+      "pbv": 2.79212282895419,
+      "div_yield": 0.0900799987792969,
+      "market_cap": 72698798062500
+    },
+    {
+      "symbol": "ISAT.JK",
+      "company_name": "PT Indosat Tbk",
+      "pe": 9.56747601303052,
+      "pbv": 1.93244513154534,
+      "div_yield": 0.05,
+      "market_cap": 71596800324540
+    },
+    {
+      "symbol": "MDKA.JK",
+      "company_name": "PT Merdeka Copper Gold Tbk",
+      "pe": 8583.17523202799,
+      "pbv": 4.93504042421044,
+      "div_yield": 0.00420725737532524,
+      "market_cap": 71461112611320
+    },
+    {
+      "symbol": "CDIA.JK",
+      "company_name": "PT Chandra Daya Investasi Tbk",
+      "pe": 59.7165247045941,
+      "pbv": 3.82950903692958,
+      "div_yield": 0.0146063419810513,
+      "market_cap": 71152743579000
+    },
+    {
+      "symbol": "BNLI.JK",
+      "company_name": "Bank Permata Tbk",
+      "pe": 18.9795804971132,
+      "pbv": 1.539092919161,
+      "div_yield": 0.0180412371134021,
+      "market_cap": 69489919094500
+    },
+    {
+      "symbol": "BRIS.JK",
+      "company_name": "PT Bank Syariah Indonesia Tbk",
+      "pe": 7.86686297747095,
+      "pbv": 1.23026190754272,
+      "div_yield": 0.023861874667081,
+      "market_cap": 62793331753625
+    },
+    {
+      "symbol": "INDF.JK",
+      "company_name": "Indofood Sukses Makmur Tbk",
+      "pe": 6.37616070297882,
+      "pbv": 0.796018633648293,
+      "div_yield": 0.041726618705036,
+      "market_cap": 61023964175000
+    },
+    {
+      "symbol": "UNVR.JK",
+      "company_name": "Unilever Indonesia Tbk",
+      "pe": 7.17401254359686,
+      "pbv": 20.0667585230421,
+      "div_yield": 0.126415094339623,
+      "market_cap": 60658500000000
+    },
+    {
+      "symbol": "NCKL.JK",
+      "company_name": "PT Trimegah Bangun Persada Tbk",
+      "pe": 5.11842786510641,
+      "pbv": 1.24406979253844,
+      "div_yield": 0.0492947969822525,
+      "market_cap": 54580289000000
+    },
+    {
+      "symbol": "AMRT.JK",
+      "company_name": "PT Sumber Alfaria Trijaya Tbk.",
+      "pe": 14.3200070104462,
+      "pbv": 2.85760384936979,
+      "div_yield": 0.0338775510204082,
+      "market_cap": 50867514582500
+    },
+    {
+      "symbol": "BDMN.JK",
+      "company_name": "PT Bank Danamon Indonesia Tbk",
+      "pe": 8.48841498246944,
+      "pbv": 0.881733424700504,
+      "div_yield": 0.0287252530184659,
+      "market_cap": 47895295837950
+    },
+    {
+      "symbol": "MEGA.JK",
+      "company_name": "Bank Mega Tbk",
+      "pe": 13.9282028739253,
+      "pbv": 2.04237553748041,
+      "div_yield": 0.0875049853142891,
+      "market_cap": 45680410534830
+    },
+    {
+      "symbol": "INKP.JK",
+      "company_name": "Indah Kiat Pulp & Paper Tbk",
+      "pe": 3.98655050735221,
+      "pbv": 0.351677016697372,
+      "div_yield": 0.00906344410876133,
+      "market_cap": 45272383836775
+    },
+    {
+      "symbol": "MLPT.JK",
+      "company_name": "PT Multipolar Technology Tbk",
+      "pe": 119.213817845345,
+      "pbv": 59.4127291898699,
+      "div_yield": 0.00568085122615733,
+      "market_cap": 44062500000000
+    },
+    {
+      "symbol": "BNGA.JK",
+      "company_name": "PT Bank CIMB Niaga Tbk",
+      "pe": 6.20625662472416,
+      "pbv": 0.758554096208026,
+      "div_yield": 0.0946023416798017,
+      "market_cap": 42563240270640
+    },
+    {
+      "symbol": "TAPG.JK",
+      "company_name": "PT Triputra Agro Persada Tbk",
+      "pe": 9.85635120218095,
+      "pbv": 3.48757559882555,
+      "div_yield": 0.054726368159204,
+      "market_cap": 39903605400000
+    },
+    {
+      "symbol": "PTBA.JK",
+      "company_name": "Bukit Asam Tbk",
+      "pe": 8.20336433484199,
+      "pbv": 1.54363924924255,
+      "div_yield": 0.0338781074659359,
+      "market_cap": 38939828265000
+    },
+    {
+      "symbol": "MTEL.JK",
+      "company_name": "PT Dayamitra Telekomunikasi Tbk",
+      "pe": 17.9945477325975,
+      "pbv": 1.199247482349,
+      "div_yield": 0.0557515227276346,
+      "market_cap": 38437451624240
+    },
+    {
+      "symbol": "MEDC.JK",
+      "company_name": "PT Medco Energi Internasional Tbk",
+      "pe": 14.532937397356,
+      "pbv": 0.982988048340871,
+      "div_yield": 0.0415739033320179,
+      "market_cap": 36698897627920
+    },
+    {
+      "symbol": "CMRY.JK",
+      "company_name": "PT Cisarua Mountain Dairy Tbk",
+      "pe": 16.7514991982733,
+      "pbv": 4.95179557011005,
+      "div_yield": 0.0671140939597315,
+      "market_cap": 35468033010000
+    },
+    {
+      "symbol": "TINS.JK",
+      "company_name": "PT Timah Tbk",
+      "pe": 9.22918367065863,
+      "pbv": 3.26233907210845,
+      "div_yield": 0.0190885287858707,
+      "market_cap": 34408620957480
+    },
+    {
+      "symbol": "GGRM.JK",
+      "company_name": "Gudang Garam Tbk",
+      "pe": 7.37512677376259,
+      "pbv": 0.508794371681118,
+      "div_yield": 0.0472673559822747,
+      "market_cap": 32565189400000
+    },
+    {
+      "symbol": "TBIG.JK",
+      "company_name": "PT Tower Bersama Infrastructure Tbk",
+      "pe": 20.647550820163,
+      "pbv": 2.50104261357254,
+      "div_yield": 0.0329824561403509,
+      "market_cap": 32286224209125
+    },
+    {
+      "symbol": "ARCI.JK",
+      "company_name": "PT Archi Indonesia Tbk",
+      "pe": 12.6334737776319,
+      "pbv": 4.3310489444897,
+      "div_yield": 0.0320158102766798,
+      "market_cap": 31922275000000
+    },
+    {
+      "symbol": "JARR.JK",
+      "company_name": "PT Jhonlin Agro Raya Tbk",
+      "pe": 118.571109343226,
+      "pbv": 15.7054508327113,
+      "div_yield": 0.00189504373177843,
+      "market_cap": 31661181121500
+    },
+    {
+      "symbol": "MYOR.JK",
+      "company_name": "Mayora Indah Tbk",
+      "pe": 8.98809506526894,
+      "pbv": 1.68620039329977,
+      "div_yield": 0.0437956204379562,
+      "market_cap": 30631418623250
+    },
+    {
+      "symbol": "AKRA.JK",
+      "company_name": "PT AKR Corporindo Tbk.",
+      "pe": 11.056358900823,
+      "pbv": 2.32360985659913,
+      "div_yield": 0.0666666666666667,
+      "market_cap": 30110211900000
+    },
+    {
+      "symbol": "ITMG.JK",
+      "company_name": "Indo Tambangraya Megah Tbk",
+      "pe": 8.32817246355697,
+      "pbv": 0.861159100033744,
+      "div_yield": 0.0284689345769045,
+      "market_cap": 29293305625000
+    },
+    {
+      "symbol": "NISP.JK",
+      "company_name": "PT Bank OCBC NISP Tbk",
+      "pe": 5.39482490193957,
+      "pbv": 0.634791077848415,
+      "div_yield": 0.0362903225806452,
+      "market_cap": 28167562279680
+    },
+    {
+      "symbol": "FAPA.JK",
+      "company_name": "PT FAP Agri Tbk",
+      "pe": 20.5987294021217,
+      "pbv": 6.46625213902284,
+      "div_yield": 0.00945945945945946,
+      "market_cap": 26857647320000
+    },
+    {
+      "symbol": "TOWR.JK",
+      "company_name": "Sarana Menara Nusantara Tbk",
+      "pe": 6.69679142771861,
+      "pbv": 0.911278226881075,
+      "div_yield": 0.0156136361035434,
+      "market_cap": 26003165641640
+    },
+    {
+      "symbol": "MAPI.JK",
+      "company_name": "Mitra Adiperkasa Tbk",
+      "pe": 10.3510839874001,
+      "pbv": 1.6825288441223,
+      "div_yield": 0.00645161290322581,
+      "market_cap": 25730000000000
+    },
+    {
+      "symbol": "EMTK.JK",
+      "company_name": "Elang Mahkota Teknologi Tbk",
+      "pe": 10.8996977182668,
+      "pbv": 0.667486445973608,
+      "div_yield": 0.0125628140703518,
+      "market_cap": 24447727690234
+    },
+    {
+      "symbol": "JPFA.JK",
+      "company_name": "JAPFA Comfeed Indonesia Tbk",
+      "pe": 4.56256252869981,
+      "pbv": 1.20680939785682,
+      "div_yield": 0.0686274509803922,
+      "market_cap": 23922213410040
+    },
+    {
+      "symbol": "SRTG.JK",
+      "company_name": "PT Saratoga Investama Sedaya Tbk",
+      "pe": 7.12429671243595,
+      "pbv": 0.444847411833405,
+      "div_yield": 0.0586931835521351,
+      "market_cap": 23874109600000
+    }
+  ]
+}
