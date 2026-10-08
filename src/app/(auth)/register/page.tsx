@@ -126,7 +126,7 @@ export default function RegisterPage() {
             className="h-11 rounded-lg border border-transparent bg-[#262626] px-4 text-white outline-none transition-all focus:border-transparent focus:ring-1 focus:ring-brand"
           />
           <p className="text-xs text-neutral-400">
-            Find your ID via <a href="https://t.me/userinfobot" target="_blank" rel="noreferrer" className="text-brand hover:underline">@userinfobot</a>. Don't forget to start <a href="https://t.me/NusaSenseBot" target="_blank" rel="noreferrer" className="text-brand hover:underline">@NusaSenseBot</a> too!
+            Find your ID by <a href="https://t.me/userinfobot" target="_blank" rel="noreferrer" className="text-brand hover:underline font-semibold">clicking here (@userinfobot)</a>. Don't forget to start <a href="https://t.me/NusaSenseBot" target="_blank" rel="noreferrer" className="text-brand hover:underline">@NusaSenseBot</a> too!
           </p>
         </div>
 
