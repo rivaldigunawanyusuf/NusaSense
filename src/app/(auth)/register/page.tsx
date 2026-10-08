@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
+import { signIn } from "next-auth/react";
 import { useAppStore } from "@/lib/store/useAppStore";
 
 export default function RegisterPage() {
@@ -13,6 +14,9 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [telegram, setTelegram] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [registerError, setRegisterError] = useState("");
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -28,16 +32,49 @@ export default function RegisterPage() {
 
   const strength = getPasswordStrength();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setRegisterError("");
+    
     if (password !== confirmPassword) {
       setPasswordMatchError(true);
       return;
     }
     setPasswordMatchError(false);
-    console.log("Register submitted", { name, email, password, confirmPassword, agreeTerms });
-    login({ name: name || "Demo User", email });
-    router.push("/app");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password, telegramChatId: telegram }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setRegisterError(data.message || "Something went wrong.");
+        setLoading(false);
+        return;
+      }
+
+      // Auto sign-in after successful registration
+      const signInRes = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (signInRes?.error) {
+        setRegisterError("Registration successful, but login failed. Please try logging in.");
+        setLoading(false);
+      } else {
+        router.push("/app");
+      }
+    } catch (err) {
+      setRegisterError("Failed to connect to the server.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -72,6 +109,20 @@ export default function RegisterPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
+            className="h-11 rounded-lg border border-transparent bg-[#262626] px-4 text-white outline-none transition-all focus:border-transparent focus:ring-1 focus:ring-brand"
+          />
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="telegram" className="text-sm font-medium text-neutral-200">
+            Telegram Username or ID
+          </label>
+          <input
+            id="telegram"
+            type="text"
+            value={telegram}
+            onChange={(e) => setTelegram(e.target.value)}
+            placeholder="@yourtelegram (Optional)"
             className="h-11 rounded-lg border border-transparent bg-[#262626] px-4 text-white outline-none transition-all focus:border-transparent focus:ring-1 focus:ring-brand"
           />
         </div>
@@ -157,12 +208,22 @@ export default function RegisterPage() {
           </label>
         </div>
 
+        {registerError && (
+          <div className="rounded-lg bg-red-500/10 p-3 text-sm text-red-500">
+            {registerError}
+          </div>
+        )}
+
         <button
           type="submit"
-          className="mt-2 h-11 w-full rounded-lg bg-brand font-semibold text-canvas transition-colors hover:bg-brand-strong disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={!agreeTerms}
+          className="mt-2 h-11 w-full rounded-lg bg-brand font-semibold text-canvas transition-colors hover:bg-brand-strong disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          disabled={!agreeTerms || loading}
         >
-          Create Account
+          {loading ? (
+            <div className="h-5 w-5 animate-spin rounded-full border-2 border-canvas border-t-transparent" />
+          ) : (
+            "Create Account"
+          )}
         </button>
       </form>
 

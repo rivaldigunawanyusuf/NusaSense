@@ -3,6 +3,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as any,
@@ -18,17 +19,25 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        // Dummy credential verification for testing/demo purposes.
-        if (credentials?.email === "rivaldigunawanyusuf@gmail.com" && credentials?.password === "password123") {
-          let user = await prisma.user.findUnique({ where: { email: credentials.email } });
-          if (!user) {
-            user = await prisma.user.create({
-              data: { email: credentials.email, name: "Rivaldi Gunawan Yusuf" }
-            });
-          }
-          return user;
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Invalid credentials");
         }
-        return null;
+        
+        const user = await prisma.user.findUnique({
+          where: { email: credentials.email },
+        });
+
+        if (!user || !user.password) {
+          throw new Error("Invalid credentials");
+        }
+
+        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+
+        if (!isPasswordValid) {
+          throw new Error("Invalid credentials");
+        }
+
+        return user;
       }
     })
   ],

@@ -42,7 +42,7 @@ export default function LoginPage() {
     setLoading(false);
     
     if (res?.error) {
-      alert("Invalid credentials. Try demo@nusasense.com / password");
+      alert("Invalid credentials. Please try again.");
     } else {
       router.push("/app");
     }
