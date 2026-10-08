@@ -12,7 +12,6 @@ export interface SignalMetrics {
   marketCap?: number | null;
   intrinsicValue?: number | null;
   eps?: number | null;
-  bandarmologi_score?: number | null;
   technical_rsi?: number | null;
 }
 

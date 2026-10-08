@@ -9,7 +9,7 @@ const AVAILABLE_METRICS = [
   { id: "pe", label: "P/E Ratio" },
   { id: "pbv", label: "PBV Ratio" },
   { id: "div_yield", label: "Dividend Yield (%)" },
-  { id: "bandarmologi", label: "Bandarmologi/Volume Score" },
+  { id: "market_cap", label: "Market Cap (IDR)" },
 ];
 
 const OPERATORS = [

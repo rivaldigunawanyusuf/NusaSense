@@ -55,8 +55,8 @@ export function SignalCard({ signal, onClick }: SignalCardProps) {
       
       <div className="mt-2 flex justify-between text-xs text-ink-faint border-t border-line pt-3">
         <span>Score: {signal.healthScore ? signal.healthScore.totalScore : '-'}/100</span>
-        {signal.metrics?.bandarmologi_score != null && (
-          <span>Bandarmologi: {signal.metrics.bandarmologi_score}</span>
+        {signal.metrics?.marketCap != null && (
+          <span>M.Cap: {(signal.metrics.marketCap / 1000000000000).toFixed(1)}T</span>
         )}
         {signal.metrics?.technical_rsi != null && (
           <span>RSI: {signal.metrics.technical_rsi}</span>
