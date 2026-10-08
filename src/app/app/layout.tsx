@@ -2,6 +2,7 @@ import { AppHeader } from "@/components/layout/AppHeader";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { OnboardingModal } from "@/components/features/OnboardingModal";
 import { TourGuide } from "@/components/features/TourGuide";
+import { DataHydrator } from "@/components/providers/DataHydrator";
 
 export default function AppLayout({
   children,
@@ -10,6 +11,7 @@ export default function AppLayout({
 }>) {
   return (
     <>
+      <DataHydrator />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-canvas"

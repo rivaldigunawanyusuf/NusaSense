@@ -26,7 +26,8 @@ export interface AppState {
   // Actions
   login: (user: { name: string; email: string }) => void;
   logout: () => void;
-  toggleWatchlist: (ticker: string) => void;
+  setWatchlist: (watchlist: string[]) => void;
+  toggleWatchlist: (ticker: string) => Promise<void>;
   setAlertsEnabled: (enabled: boolean) => void;
   setTelegramChatId: (id: string | null) => void;
   completeOnboarding: () => void;
@@ -53,7 +54,9 @@ export const useAppStore = create<AppState>()(
       login: (user) => set({ isAuthenticated: true, user }),
       logout: () => set({ isAuthenticated: false, user: null }),
 
-      toggleWatchlist: (ticker: string) => {
+      setWatchlist: (watchlist: string[]) => set({ watchlist }),
+
+      toggleWatchlist: async (ticker: string) => {
         const clean = sanitizeTicker(ticker);
         if (!clean) return;
 
@@ -62,6 +65,11 @@ export const useAppStore = create<AppState>()(
 
         if (exists) {
           set({ watchlist: current.filter((t) => t !== clean) });
+          fetch('/api/user/watchlist', {
+            method: 'POST',
+            body: JSON.stringify({ symbol: clean, action: 'remove' }),
+            headers: { 'Content-Type': 'application/json' }
+          }).catch(console.error);
         } else {
           // Max 5 limit check
           if (current.length >= 5) {
@@ -69,6 +77,11 @@ export const useAppStore = create<AppState>()(
             return;
           }
           set({ watchlist: [...current, clean] });
+          fetch('/api/user/watchlist', {
+            method: 'POST',
+            body: JSON.stringify({ symbol: clean, action: 'add' }),
+            headers: { 'Content-Type': 'application/json' }
+          }).catch(console.error);
         }
       },
 

@@ -9,7 +9,18 @@ export function SettingsManager() {
   const { alertPrefs, setAlertsEnabled, setTelegramChatId, _hasHydrated } = useAppStore();
   const [mounted, setMounted] = useState(false);
   
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    fetch('/api/user/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.telegramChatId && data.telegramChatId !== alertPrefs.telegramChatId) {
+          setTelegramChatId(data.telegramChatId);
+        }
+      })
+      .catch(console.error);
+  }, []);
+  
   if (!mounted || !_hasHydrated) return null;
 
   return (
@@ -59,6 +70,15 @@ export function SettingsManager() {
               placeholder="Chat ID (e.g. 123456789)"
               value={alertPrefs.telegramChatId || ''}
               onChange={(e) => setTelegramChatId(e.target.value)}
+              onBlur={async () => {
+                if (alertPrefs.telegramChatId) {
+                  await fetch('/api/user/settings', {
+                    method: 'POST',
+                    body: JSON.stringify({ telegramChatId: alertPrefs.telegramChatId }),
+                    headers: { 'Content-Type': 'application/json' }
+                  });
+                }
+              }}
               className="h-8 rounded-md border border-line bg-canvas px-2 text-xs text-ink outline-none focus:border-brand w-32"
             />
             {alertPrefs.telegramChatId ? (
