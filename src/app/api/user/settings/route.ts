@@ -23,8 +23,8 @@ export async function POST(req: Request) {
   const { telegramChatId } = body;
 
   // OWASP: Input Validation
-  if (telegramChatId && (typeof telegramChatId !== "string" || telegramChatId.length > 50)) {
-    return NextResponse.json({ error: "Invalid Chat ID/Username format" }, { status: 400 });
+  if (telegramChatId && (typeof telegramChatId !== "string" || telegramChatId.length > 50 || !/^\d+$/.test(telegramChatId))) {
+    return NextResponse.json({ error: "Invalid Chat ID format. Must be numeric." }, { status: 400 });
   }
 
   await prisma.user.update({

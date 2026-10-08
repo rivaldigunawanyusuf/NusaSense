@@ -64,37 +64,42 @@ export function SettingsManager() {
         label="Telegram"
         description="Receive anomaly alerts in your Telegram chat"
         value={
-          <div className="flex items-center gap-2">
-            <input 
-              type="text" 
-              placeholder="Chat ID (e.g. 123456789)"
-              value={alertPrefs.telegramChatId || ''}
-              onChange={(e) => setTelegramChatId(e.target.value)}
-              onBlur={async () => {
-                if (alertPrefs.telegramChatId) {
-                  await fetch('/api/user/settings', {
-                    method: 'POST',
-                    body: JSON.stringify({ telegramChatId: alertPrefs.telegramChatId }),
-                    headers: { 'Content-Type': 'application/json' }
-                  });
-                }
-              }}
-              className="h-8 rounded-md border border-line bg-canvas px-2 text-xs text-ink outline-none focus:border-brand w-32"
-            />
-            {alertPrefs.telegramChatId ? (
-               <span className="rounded-full border border-brand/30 bg-brand/10 px-2 py-0.5 text-xs text-brand font-medium">
-                 Linked
-               </span>
-            ) : (
-               <a 
-                 href="https://t.me/NusaSenseBot" 
-                 target="_blank" 
-                 rel="noreferrer"
-                 className="text-xs text-brand hover:underline"
-               >
-                 Get ID
-               </a>
-            )}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <input 
+                type="text" 
+                placeholder="Chat ID (e.g. 123456789)"
+                value={alertPrefs.telegramChatId || ''}
+                onChange={(e) => setTelegramChatId(e.target.value)}
+                onBlur={async () => {
+                  if (alertPrefs.telegramChatId) {
+                    await fetch('/api/user/settings', {
+                      method: 'POST',
+                      body: JSON.stringify({ telegramChatId: alertPrefs.telegramChatId }),
+                      headers: { 'Content-Type': 'application/json' }
+                    });
+                  }
+                }}
+                className="h-8 rounded-md border border-line bg-canvas px-2 text-xs text-ink outline-none focus:border-brand w-32"
+              />
+              {alertPrefs.telegramChatId ? (
+                 <span className="rounded-full border border-brand/30 bg-brand/10 px-2 py-0.5 text-xs text-brand font-medium">
+                   Linked
+                 </span>
+              ) : (
+                 <a 
+                   href="https://t.me/userinfobot" 
+                   target="_blank" 
+                   rel="noreferrer"
+                   className="text-xs text-brand hover:underline"
+                 >
+                   Get ID
+                 </a>
+              )}
+            </div>
+            <p className="text-[10px] text-neutral-400">
+              Find ID via @userinfobot. Then start <a href="https://t.me/NusaSenseBot" target="_blank" rel="noreferrer" className="text-brand hover:underline">@NusaSenseBot</a>.
+            </p>
           </div>
         }
       />

@@ -17,25 +17,7 @@ export async function POST(req: Request) {
       where: { email },
     });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     if (existingUser) {
-      if (!existingUser.password) {
-        // User exists but has no password (created via OAuth or old dummy logic)
-        // Let's update their password and telegram ID
-        const updatedUser = await prisma.user.update({
-          where: { email },
-          data: {
-            password: hashedPassword,
-            telegramChatId: telegramChatId || existingUser.telegramChatId,
-            name: name || existingUser.name,
-          },
-        });
-        return NextResponse.json(
-          { message: "Account updated successfully", user: { id: updatedUser.id, name: updatedUser.name, email: updatedUser.email } },
-          { status: 200 }
-        );
-      }
       return NextResponse.json(
         { message: "User with this email already exists" },
         { status: 400 }
